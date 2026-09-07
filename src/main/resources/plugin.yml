@@ -12,10 +12,20 @@ depend: [RPEngine]
 commands:
   skateboard:
     description: Get a skateboard, or set one down in front of you.
-    usage: /<command> [here | stance <left|right>]
+    usage: /<command> [here | stance <left|right> | reload]
     permission: skateboards.use
+  skatepark:
+    description: Get the pieces you build a skatepark out of.
+    usage: /<command> [piece | all]
+    permission: skateboards.park
 
 permissions:
   skateboards.use:
     description: Get and ride a skateboard.
     default: true
+  skateboards.park:
+    description: Get skatepark pieces to place.
+    default: op
+  skateboards.reload:
+    description: Reload the skateboard config.
+    default: op

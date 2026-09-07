@@ -13,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -49,6 +50,7 @@ public final class SkateboardsPlugin extends JavaPlugin {
     private SkateboardMechanics mechanics;
     private Stance stance;
     private Messages messages;
+    private Skatepark park;
 
     @Override
     public void onEnable() {
@@ -81,15 +83,24 @@ public final class SkateboardsPlugin extends JavaPlugin {
         saveDefaultConfig();
         messages = new Messages(getConfig());
         stance = new Stance(this);
+        park = new Skatepark(engine, this::messages);
         mechanics = new SkateboardMechanics(this, engine, stance, this::messages,
                 () -> getConfig().getBoolean("bail", true));
         getServer().getPluginManager().registerEvents(mechanics, this);
         getServer().getScheduler().runTaskTimer(this, mechanics::tick, 1L, 1L);
-        getLogger().info("Skate or die. /skateboard for a board.");
+        getLogger().info("Skate or die. /skateboard for a board, /skatepark for something to ride.");
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        return command.getName().equalsIgnoreCase("skatepark") ? park.complete(args) : null;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (command.getName().equalsIgnoreCase("skatepark")) {
+            return park.command(sender, args);
+        }
         if (args.length > 0 && args[0].equalsIgnoreCase("reload")
                 && sender.hasPermission("skateboards.reload")) {
             reloadConfig();

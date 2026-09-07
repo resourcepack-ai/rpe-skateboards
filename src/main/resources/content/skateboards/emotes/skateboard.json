@@ -3360,74 +3360,12 @@
      }
     ]
    },
-   "rightLeg": {
-    "rotation": [
-     {
-      "time": 0,
-      "value": [
-       115,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.8,
-      "value": [
-       117,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 1.6,
-      "value": [
-       115,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     }
-    ]
-   },
-   "rightShin": {
-    "rotation": [
-     {
-      "time": 0,
-      "value": [
-       -120,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.8,
-      "value": [
-       -122,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 1.6,
-      "value": [
-       -120,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     }
-    ]
-   },
    "leftLeg": {
     "rotation": [
      {
       "time": 0,
       "value": [
-       110,
+       129,
        0,
        0
       ],
@@ -3436,7 +3374,7 @@
      {
       "time": 0.8,
       "value": [
-       112,
+       131,
        0,
        0
       ],
@@ -3445,7 +3383,7 @@
      {
       "time": 1.6,
       "value": [
-       110,
+       129,
        0,
        0
       ],
@@ -3458,7 +3396,7 @@
      {
       "time": 0,
       "value": [
-       -114,
+       -101,
        0,
        0
       ],
@@ -3467,7 +3405,7 @@
      {
       "time": 0.8,
       "value": [
-       -116,
+       -103,
        0,
        0
       ],
@@ -3476,7 +3414,69 @@
      {
       "time": 1.6,
       "value": [
-       -114,
+       -101,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "rightLeg": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       82,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.8,
+      "value": [
+       84,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.6,
+      "value": [
+       82,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "rightShin": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -101,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.8,
+      "value": [
+       -103,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.6,
+      "value": [
+       -101,
        0,
        0
       ],
@@ -3520,7 +3520,7 @@
      "time": 0,
      "value": [
       0,
-      -4.3,
+      -3.8,
       0
      ],
      "interpolation": "smooth"
@@ -3529,7 +3529,7 @@
      "time": 0.8,
      "value": [
       0,
-      -4.7,
+      -4.2,
       0
      ],
      "interpolation": "smooth"
@@ -3538,7 +3538,353 @@
      "time": 1.6,
      "value": [
       0,
-      -4.3,
+      -3.8,
+      0
+     ],
+     "interpolation": "smooth"
+    }
+   ]
+  }
+ },
+ "skateboards_coffin": {
+  "name": "Skateboard - coffin",
+  "length": 2.4,
+  "loop": true,
+  "animators": {
+   "head": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -38,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       -40,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       -38,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "rightArm": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       28,
+       0,
+       -6
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       30,
+       0,
+       -6
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       28,
+       0,
+       -6
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "leftArm": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       28,
+       0,
+       6
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       30,
+       0,
+       6
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       28,
+       0,
+       6
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "rightForearm": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       52,
+       0,
+       -64
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       54,
+       0,
+       -66
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       52,
+       0,
+       -64
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "leftForearm": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       52,
+       0,
+       64
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       54,
+       0,
+       66
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       52,
+       0,
+       64
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "leftLeg": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -6,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       -3,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       -6,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "leftShin": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -10,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       -14,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       -10,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "rightLeg": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -3,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       -6,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       -3,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "rightShin": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -14,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       -10,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       -14,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   }
+  },
+  "root": {
+   "rotation": [
+    {
+     "time": 0,
+     "value": [
+      90,
+      0,
+      0
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 1.2,
+     "value": [
+      92,
+      0,
+      0
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 2.4,
+     "value": [
+      90,
+      0,
+      0
+     ],
+     "interpolation": "smooth"
+    }
+   ],
+   "position": [
+    {
+     "time": 0,
+     "value": [
+      0,
+      -9,
+      0
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 1.2,
+     "value": [
+      0,
+      -9,
+      0
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 2.4,
+     "value": [
+      0,
+      -9,
       0
      ],
      "interpolation": "smooth"
@@ -6907,74 +7253,12 @@
      }
     ]
    },
-   "leftLeg": {
-    "rotation": [
-     {
-      "time": 0,
-      "value": [
-       115,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.8,
-      "value": [
-       117,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 1.6,
-      "value": [
-       115,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     }
-    ]
-   },
-   "leftShin": {
-    "rotation": [
-     {
-      "time": 0,
-      "value": [
-       -120,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.8,
-      "value": [
-       -122,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 1.6,
-      "value": [
-       -120,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     }
-    ]
-   },
    "rightLeg": {
     "rotation": [
      {
       "time": 0,
       "value": [
-       110,
+       129,
        0,
        0
       ],
@@ -6983,7 +7267,7 @@
      {
       "time": 0.8,
       "value": [
-       112,
+       131,
        0,
        0
       ],
@@ -6992,7 +7276,7 @@
      {
       "time": 1.6,
       "value": [
-       110,
+       129,
        0,
        0
       ],
@@ -7005,7 +7289,7 @@
      {
       "time": 0,
       "value": [
-       -114,
+       -101,
        0,
        0
       ],
@@ -7014,7 +7298,7 @@
      {
       "time": 0.8,
       "value": [
-       -116,
+       -103,
        0,
        0
       ],
@@ -7023,7 +7307,69 @@
      {
       "time": 1.6,
       "value": [
-       -114,
+       -101,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "leftLeg": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       82,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.8,
+      "value": [
+       84,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.6,
+      "value": [
+       82,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "leftShin": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -101,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.8,
+      "value": [
+       -103,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.6,
+      "value": [
+       -101,
        0,
        0
       ],
@@ -7067,7 +7413,7 @@
      "time": 0,
      "value": [
       0,
-      -4.3,
+      -3.8,
       0
      ],
      "interpolation": "smooth"
@@ -7076,7 +7422,7 @@
      "time": 0.8,
      "value": [
       0,
-      -4.7,
+      -4.2,
       0
      ],
      "interpolation": "smooth"
@@ -7085,7 +7431,353 @@
      "time": 1.6,
      "value": [
       0,
-      -4.3,
+      -3.8,
+      0
+     ],
+     "interpolation": "smooth"
+    }
+   ]
+  }
+ },
+ "skateboards_coffin_goofy": {
+  "name": "Skateboard - coffin (goofy)",
+  "length": 2.4,
+  "loop": true,
+  "animators": {
+   "head": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -38,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       -40,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       -38,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "leftArm": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       28,
+       0,
+       6
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       30,
+       0,
+       6
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       28,
+       0,
+       6
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "rightArm": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       28,
+       0,
+       -6
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       30,
+       0,
+       -6
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       28,
+       0,
+       -6
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "leftForearm": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       52,
+       0,
+       64
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       54,
+       0,
+       66
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       52,
+       0,
+       64
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "rightForearm": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       52,
+       0,
+       -64
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       54,
+       0,
+       -66
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       52,
+       0,
+       -64
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "rightLeg": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -6,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       -3,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       -6,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "rightShin": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -10,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       -14,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       -10,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "leftLeg": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -3,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       -6,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       -3,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "leftShin": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -14,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.2,
+      "value": [
+       -10,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 2.4,
+      "value": [
+       -14,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   }
+  },
+  "root": {
+   "rotation": [
+    {
+     "time": 0,
+     "value": [
+      90,
+      0,
+      0
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 1.2,
+     "value": [
+      92,
+      0,
+      0
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 2.4,
+     "value": [
+      90,
+      0,
+      0
+     ],
+     "interpolation": "smooth"
+    }
+   ],
+   "position": [
+    {
+     "time": 0,
+     "value": [
+      0,
+      -9,
+      0
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 1.2,
+     "value": [
+      0,
+      -9,
+      0
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 2.4,
+     "value": [
+      0,
+      -9,
       0
      ],
      "interpolation": "smooth"

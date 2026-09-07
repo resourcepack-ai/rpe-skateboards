@@ -41,6 +41,12 @@ import java.util.function.Supplier;
  *   the nose, which is how a board is walked backwards. It only starts once
  *   the board has all but stopped, so holding S while rolling forward is
  *   still a brake, and it tops out low — nobody pushes fast backwards.</li>
+ *   <li><b>The coffin.</b> Hold shift while rolling and the rider lies flat
+ *   on their back along the board, feet first, hands folded on their chest.
+ *   Shift is Minecraft's dismount, so this only works because the engine can
+ *   be asked to keep a rider in their seat while the vehicle is moving
+ *   ({@link Vehicle#holdOccupant}) - and because that hold lets go the moment
+ *   the board stops, which is also how you get off.</li>
  *   <li><b>Tucking.</b> Holding sprint crouches the rider and lifts the speed
  *   cap from cruising to the board's top, picking up speed slowly while held.
  *   "Bending down to go faster" is the mechanic the owner asked for by name,
@@ -102,6 +108,7 @@ final class SkateboardMechanics implements Listener {
     static final String EMOTE_PUSH = "skateboards_push";
     static final String EMOTE_PUSH_BACK = "skateboards_pushback";
     static final String EMOTE_TUCK = "skateboards_tuck";
+    static final String EMOTE_COFFIN = "skateboards_coffin";
 
     /**
      * The seat is drawn for a regular rider (yaw 90: chest to the board's
@@ -130,6 +137,20 @@ final class SkateboardMechanics implements Listener {
      * both feet come round with them.
      */
     static final double TUCK_YAW = 0;
+
+    /** Where a rider faces lying down, for the same reason as the tuck: down the board. */
+    static final double COFFIN_YAW = 0;
+
+    /**
+     * How fast the board has to be rolling for shift to lie the rider down
+     * rather than put them off.
+     *
+     * <p>Above the engine's own release speed, and deliberately not by much:
+     * the hold that keeps a rider on the board stops holding below that, so a
+     * coffin that started any slower would be a rider lying down for a tick
+     * and then standing in the road.
+     */
+    static final double COFFIN_MIN_SPEED = 2.0;
 
     private final Plugin plugin;
     private final RPEnginePlugin engine;
@@ -167,6 +188,7 @@ final class SkateboardMechanics implements Listener {
         int pushCooldown;
         int pushEmoteLeft;
         boolean tucking;
+        boolean coffin;
         boolean wasAirborne;
         boolean flicked;
         boolean limited;
@@ -227,6 +249,13 @@ final class SkateboardMechanics implements Listener {
         if (!ride.known) {
             ride.goofy = stance.isGoofy(rider);
             ride.known = true;
+            // Asked for ONCE, at the start of the ride, and not when the key
+            // is seen: the dismount happens on the tick shift goes down, and
+            // a hold applied after reading the key would be applied to
+            // somebody already standing in the road. The engine lets go by
+            // itself the moment the board stops, which is what makes "stop,
+            // then step off" the whole rule.
+            board.holdOccupant(rider, true);
         }
         VehicleInput input = board.input();
         double speed = board.groundSpeed();
@@ -245,14 +274,16 @@ final class SkateboardMechanics implements Listener {
         ride.wasAirborne = airborne;
         ride.last = now;
 
-        // Which way the rider stands on the board: their stance, except while
-        // tucked, when they square up down the board. See TUCK_YAW.
-        face(board, rider, ride, ride.tucking ? TUCK_YAW : ride.goofy ? GOOFY_YAW : REGULAR_YAW);
+        // Which way the rider stands on the board: their stance, except lying
+        // down or tucked, when they square up down the board. See TUCK_YAW.
+        face(board, rider, ride, ride.coffin ? COFFIN_YAW
+                : ride.tucking ? TUCK_YAW
+                : ride.goofy ? GOOFY_YAW : REGULAR_YAW);
 
         // Whatever the board is doing, unless a push or a tuck is in progress:
         // the rider is dressed from here rather than from the seat's table,
         // because the seat's table cannot know their stance.
-        if (!ride.tucking && ride.pushEmoteLeft == 0) {
+        if (!ride.tucking && !ride.coffin && ride.pushEmoteLeft == 0) {
             wear(board, rider, ride, stateEmote(board, ride.goofy));
         }
     }
@@ -272,6 +303,19 @@ final class SkateboardMechanics implements Listener {
         }
         if (ride.pushEmoteLeft > 0) {
             ride.pushEmoteLeft--;
+        }
+
+        // The coffin: shift held while rolling. It beats everything else on
+        // the ground - a rider lying on their back is not pushing, tucking or
+        // steering with their feet - and it lets the board roll on, because
+        // the whole point of it is that you are not doing anything.
+        ride.coffin = input.sneak() && speed > COFFIN_MIN_SPEED;
+        if (ride.coffin) {
+            ride.tucking = false;
+            limit(board, ride, true);
+            wear(board, rider, ride, EMOTE_COFFIN);
+            board.nudge(ROLL_ASSIST);
+            return;
         }
 
         // Tuck: sprint held while rolling. The cap comes off, the rider
@@ -322,6 +366,7 @@ final class SkateboardMechanics implements Listener {
     private void inTheAir(Vehicle board, VehicleInput input, Ride ride) {
         if (!ride.wasAirborne) {
             ride.flicked = false;
+            ride.coffin = false;
             // The airborne emote is the tuck-and-grab; a push or a tuck in
             // progress gives way to it.
             ride.pushEmoteLeft = 0;

@@ -29,8 +29,9 @@ final class Messages {
     static {
         DEFAULTS.put("players-only", "Only a player can hold a skateboard.");
         DEFAULTS.put("given", "Here's a board. Right-click the ground to set it down, W to push, "
-                + "S to push it backwards, hold sprint to tuck, space to ollie, A/D in the air to "
-                + "spin it. /skateboard stance right if you ride right foot forward.");
+                + "S to push it backwards, hold sprint to tuck, hold shift to lie back, space to "
+                + "ollie, A/D in the air to spin it. Stop before you step off. "
+                + "/skateboard stance right if you ride right foot forward.");
         DEFAULTS.put("no-item", "The engine has no skateboard item yet - has it finished loading? Try /rp reload.");
         DEFAULTS.put("placed", "Board's down. Right-click it to step on.");
         DEFAULTS.put("place-failed", "Couldn't set a board down there.");
@@ -41,6 +42,12 @@ final class Messages {
         DEFAULTS.put("fakie", "Fakie!");
         DEFAULTS.put("bailed", "&cBailed! &7Land it straight (or straight backwards) next time.");
         DEFAULTS.put("reloaded", "Config reloaded.");
+        DEFAULTS.put("park-list", "&f{count}&7 skatepark pieces: &f{pieces}&7. "
+                + "/skatepark <piece> for one, /skatepark all for the lot.");
+        DEFAULTS.put("park-given", "Here's a &f{piece}&7. Right-click the ground to place it, punch it to take it back.");
+        DEFAULTS.put("park-all", "There you go - all &f{count}&7 pieces. Build something.");
+        DEFAULTS.put("park-unknown", "There's no park piece called &f{piece}&7. /skatepark to see them all.");
+        DEFAULTS.put("park-none", "The engine has no park pieces yet - has it finished loading? Try /rp reload.");
     }
 
     /** The prefix every message is sent behind. Empty is allowed, and means none. */
