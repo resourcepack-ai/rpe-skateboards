@@ -35,6 +35,11 @@ import java.util.UUID;
  *   {@link #PUSH_INTERVAL} ticks — a nudge of {@link #PUSH_BOOST} and the
  *   push emote for the length of the kick — up to a cruising speed the legs
  *   cannot beat. That is the rhythm of skating: kick, roll, kick.</li>
+ *   <li><b>Pushing backwards.</b> S is the same kick with the other foot: the
+ *   back foot holds the tail and the FRONT one reaches down and sweeps toward
+ *   the nose, which is how a board is walked backwards. It only starts once
+ *   the board has all but stopped, so holding S while rolling forward is
+ *   still a brake, and it tops out low — nobody pushes fast backwards.</li>
  *   <li><b>Tucking.</b> Holding sprint crouches the rider and lifts the speed
  *   cap from cruising to the board's top, picking up speed slowly while held.
  *   "Bending down to go faster" is the mechanic the owner asked for by name,
@@ -67,6 +72,16 @@ final class SkateboardMechanics implements Listener {
      * every kick and the rider jittered.
      */
     static final int PUSH_EMOTE_TICKS = 14;
+    /** One backwards kick's worth of speed. Less than a forward one: it is an awkward push. */
+    static final double PUSH_BACK_BOOST = 1.4;
+    /** Fastest the front foot will walk it backwards, blocks per second. */
+    static final double PUSH_BACK_CAP = 4.0;
+    /**
+     * How slowly the board has to be rolling FORWARD before S starts kicking
+     * back rather than braking. The engine's own reverse threshold, so the
+     * kick starts exactly where its brake gives up.
+     */
+    static final double PUSH_BACK_FROM = 0.5;
     /** Speed cap while standing up. The definition's own top speed is the tucked one. */
     static final double CRUISE_LIMIT = 9.0;
     /** Speed picked up per tick while tucked and moving, blocks per second. */
@@ -84,6 +99,7 @@ final class SkateboardMechanics implements Listener {
     static final double BAIL_MIN_SPEED = 3.0;
 
     static final String EMOTE_PUSH = "skateboards_push";
+    static final String EMOTE_PUSH_BACK = "skateboards_pushback";
     static final String EMOTE_TUCK = "skateboards_tuck";
 
     /**
@@ -222,6 +238,21 @@ final class SkateboardMechanics implements Listener {
         if (tuck) {
             wear(board, rider, ride, EMOTE_TUCK);
             board.nudge(TUCK_GAIN);
+            return;
+        }
+
+        // Push backwards: S, once the brake has done its work. groundSpeed()
+        // has no sign — a drift is still moving — so the state is what says
+        // which way along the board it is going.
+        if (input.backward()) {
+            double along = board.is(VehicleState.REVERSING) ? -speed : speed;
+            if (along < PUSH_BACK_FROM && along > -PUSH_BACK_CAP && ride.pushCooldown == 0) {
+                board.nudge(-Math.min(PUSH_BACK_BOOST, PUSH_BACK_CAP + 0.5 + along));
+                wear(board, rider, ride, EMOTE_PUSH_BACK);
+                ride.pushCooldown = PUSH_INTERVAL;
+                ride.pushEmoteLeft = PUSH_EMOTE_TICKS;
+                rider.getWorld().playSound(board.location(), Sound.BLOCK_STONE_STEP, 0.4f, 0.8f);
+            }
             return;
         }
 
