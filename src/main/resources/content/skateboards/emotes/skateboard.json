@@ -2546,7 +2546,7 @@
  },
  "skateboards_push": {
   "name": "Skateboard - push",
-  "length": 0.7,
+  "length": 0.9,
   "loop": true,
   "animators": {
    "head": {
@@ -2554,26 +2554,26 @@
      {
       "time": 0,
       "value": [
-       0,
-       65,
+       4,
+       40,
        0
       ],
       "interpolation": "smooth"
      },
      {
-      "time": 0.35,
+      "time": 0.45,
+      "value": [
+       8,
+       36,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.9,
       "value": [
        4,
-       63,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.7,
-      "value": [
-       0,
-       65,
+       40,
        0
       ],
       "interpolation": "smooth"
@@ -2585,36 +2585,36 @@
      {
       "time": 0,
       "value": [
-       20,
+       -20,
        0,
-       18
+       14
       ],
       "interpolation": "smooth"
      },
      {
-      "time": 0.2,
-      "value": [
-       8,
-       0,
-       30
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.45,
+      "time": 0.3,
       "value": [
        30,
        0,
-       22
+       12
       ],
       "interpolation": "smooth"
      },
      {
-      "time": 0.7,
+      "time": 0.6,
       "value": [
-       20,
+       -25,
        0,
-       18
+       14
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.9,
+      "value": [
+       -20,
+       0,
+       14
       ],
       "interpolation": "smooth"
      }
@@ -2625,36 +2625,36 @@
      {
       "time": 0,
       "value": [
-       18,
+       25,
        0,
-       -18
+       -14
       ],
       "interpolation": "smooth"
      },
      {
-      "time": 0.2,
+      "time": 0.3,
+      "value": [
+       -20,
+       0,
+       -12
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.6,
       "value": [
        30,
        0,
-       -26
+       -14
       ],
       "interpolation": "smooth"
      },
      {
-      "time": 0.45,
+      "time": 0.9,
       "value": [
-       10,
+       25,
        0,
-       -16
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.7,
-      "value": [
-       18,
-       0,
-       -18
+       -14
       ],
       "interpolation": "smooth"
      }
@@ -2665,15 +2665,6 @@
      {
       "time": 0,
       "value": [
-       30,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.35,
-      "value": [
        20,
        0,
        0
@@ -2681,9 +2672,18 @@
       "interpolation": "smooth"
      },
      {
-      "time": 0.7,
+      "time": 0.45,
       "value": [
        30,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.9,
+      "value": [
+       20,
        0,
        0
       ],
@@ -2696,6 +2696,15 @@
      {
       "time": 0,
       "value": [
+       20,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.45,
+      "value": [
        30,
        0,
        0
@@ -2703,18 +2712,9 @@
       "interpolation": "smooth"
      },
      {
-      "time": 0.35,
+      "time": 0.9,
       "value": [
-       24,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.7,
-      "value": [
-       30,
+       20,
        0,
        0
       ],
@@ -2727,36 +2727,54 @@
      {
       "time": 0,
       "value": [
-       10,
+       12,
        0,
-       6
+       8
       ],
       "interpolation": "smooth"
      },
      {
-      "time": 0.2,
+      "time": 0.15,
       "value": [
-       16,
+       42,
        0,
-       -38
+       -18
       ],
       "interpolation": "smooth"
      },
      {
-      "time": 0.45,
+      "time": 0.3,
+      "value": [
+       38,
+       0,
+       -8
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.6,
+      "value": [
+       22,
+       0,
+       34
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.75,
+      "value": [
+       30,
+       0,
+       14
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.9,
       "value": [
        12,
        0,
-       26
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.7,
-      "value": [
-       10,
-       0,
-       6
+       8
       ],
       "interpolation": "smooth"
      }
@@ -2767,23 +2785,14 @@
      {
       "time": 0,
       "value": [
-       -20,
+       -22,
        0,
        0
       ],
       "interpolation": "smooth"
      },
      {
-      "time": 0.2,
-      "value": [
-       -46,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.45,
+      "time": 0.15,
       "value": [
        -8,
        0,
@@ -2792,9 +2801,36 @@
       "interpolation": "smooth"
      },
      {
-      "time": 0.7,
+      "time": 0.3,
       "value": [
-       -20,
+       -2,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.6,
+      "value": [
+       -6,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.75,
+      "value": [
+       -40,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.9,
+      "value": [
+       -22,
        0,
        0
       ],
@@ -2807,23 +2843,14 @@
      {
       "time": 0,
       "value": [
-       10,
+       14,
        0,
        -6
       ],
       "interpolation": "smooth"
      },
      {
-      "time": 0.2,
-      "value": [
-       26,
-       0,
-       -8
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.45,
+      "time": 0.3,
       "value": [
        30,
        0,
@@ -2832,9 +2859,18 @@
       "interpolation": "smooth"
      },
      {
-      "time": 0.7,
+      "time": 0.6,
       "value": [
-       10,
+       36,
+       0,
+       -8
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.9,
+      "value": [
+       14,
        0,
        -6
       ],
@@ -2847,34 +2883,34 @@
      {
       "time": 0,
       "value": [
-       -20,
+       -24,
        0,
        0
       ],
       "interpolation": "smooth"
      },
      {
-      "time": 0.2,
+      "time": 0.3,
       "value": [
-       -44,
+       -48,
        0,
        0
       ],
       "interpolation": "smooth"
      },
      {
-      "time": 0.45,
+      "time": 0.6,
       "value": [
-       -52,
+       -56,
        0,
        0
       ],
       "interpolation": "smooth"
      },
      {
-      "time": 0.7,
+      "time": 0.9,
       "value": [
-       -20,
+       -24,
        0,
        0
       ],
@@ -2888,36 +2924,74 @@
     {
      "time": 0,
      "value": [
-      -2,
-      0,
-      4
+      -6,
+      34,
+      3
      ],
      "interpolation": "smooth"
     },
     {
-     "time": 0.2,
-     "value": [
-      -12,
-      0,
-      -6
-     ],
-     "interpolation": "smooth"
-    },
-    {
-     "time": 0.45,
+     "time": 0.3,
      "value": [
       -16,
-      0,
-      -10
+      38,
+      0
      ],
      "interpolation": "smooth"
     },
     {
-     "time": 0.7,
+     "time": 0.6,
      "value": [
-      -2,
+      -20,
+      36,
+      -2
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 0.9,
+     "value": [
+      -6,
+      34,
+      3
+     ],
+     "interpolation": "smooth"
+    }
+   ],
+   "position": [
+    {
+     "time": 0,
+     "value": [
       0,
-      4
+      0,
+      0
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 0.3,
+     "value": [
+      0,
+      -2.5,
+      0
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 0.6,
+     "value": [
+      0,
+      -3,
+      0
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 0.9,
+     "value": [
+      0,
+      0,
+      0
      ],
      "interpolation": "smooth"
     }
@@ -2934,27 +3008,27 @@
      {
       "time": 0,
       "value": [
-       -14,
-       66,
-       -2
+       -30,
+       62,
+       0
       ],
       "interpolation": "smooth"
      },
      {
       "time": 0.8,
       "value": [
-       -16,
-       68,
-       -2
+       -32,
+       64,
+       0
       ],
       "interpolation": "smooth"
      },
      {
       "time": 1.6,
       "value": [
-       -14,
-       66,
-       -2
+       -30,
+       62,
+       0
       ],
       "interpolation": "smooth"
      }
@@ -2965,58 +3039,27 @@
      {
       "time": 0,
       "value": [
-       52,
+       -28,
        0,
-       12
+       8
       ],
       "interpolation": "smooth"
      },
      {
       "time": 0.8,
       "value": [
-       55,
+       -30,
        0,
-       10
+       8
       ],
       "interpolation": "smooth"
      },
      {
       "time": 1.6,
       "value": [
-       52,
+       -28,
        0,
-       12
-      ],
-      "interpolation": "smooth"
-     }
-    ]
-   },
-   "leftArm": {
-    "rotation": [
-     {
-      "time": 0,
-      "value": [
-       50,
-       0,
-       -12
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.8,
-      "value": [
-       53,
-       0,
-       -10
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 1.6,
-      "value": [
-       50,
-       0,
-       -12
+       8
       ],
       "interpolation": "smooth"
      }
@@ -3027,16 +3070,7 @@
      {
       "time": 0,
       "value": [
-       40,
        0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.8,
-      "value": [
-       44,
        0,
        0
       ],
@@ -3045,9 +3079,40 @@
      {
       "time": 1.6,
       "value": [
-       40,
+       0,
        0,
        0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "leftArm": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -40,
+       0,
+       -70
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.8,
+      "value": [
+       -42,
+       0,
+       -74
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.6,
+      "value": [
+       -40,
+       0,
+       -70
       ],
       "interpolation": "smooth"
      }
@@ -3058,7 +3123,7 @@
      {
       "time": 0,
       "value": [
-       40,
+       15,
        0,
        0
       ],
@@ -3067,7 +3132,7 @@
      {
       "time": 0.8,
       "value": [
-       44,
+       18,
        0,
        0
       ],
@@ -3076,7 +3141,7 @@
      {
       "time": 1.6,
       "value": [
-       40,
+       15,
        0,
        0
       ],
@@ -3089,27 +3154,27 @@
      {
       "time": 0,
       "value": [
-       58,
+       75,
        0,
-       10
+       12
       ],
       "interpolation": "smooth"
      },
      {
       "time": 0.8,
       "value": [
-       62,
+       77,
        0,
-       10
+       12
       ],
       "interpolation": "smooth"
      },
      {
       "time": 1.6,
       "value": [
-       58,
+       75,
        0,
-       10
+       12
       ],
       "interpolation": "smooth"
      }
@@ -3120,7 +3185,7 @@
      {
       "time": 0,
       "value": [
-       -82,
+       -112,
        0,
        0
       ],
@@ -3129,7 +3194,7 @@
      {
       "time": 0.8,
       "value": [
-       -86,
+       -114,
        0,
        0
       ],
@@ -3138,7 +3203,7 @@
      {
       "time": 1.6,
       "value": [
-       -82,
+       -112,
        0,
        0
       ],
@@ -3151,27 +3216,27 @@
      {
       "time": 0,
       "value": [
-       54,
+       75,
        0,
-       -12
+       -14
       ],
       "interpolation": "smooth"
      },
      {
       "time": 0.8,
       "value": [
-       58,
+       77,
        0,
-       -12
+       -14
       ],
       "interpolation": "smooth"
      },
      {
       "time": 1.6,
       "value": [
-       54,
+       75,
        0,
-       -12
+       -14
       ],
       "interpolation": "smooth"
      }
@@ -3182,7 +3247,7 @@
      {
       "time": 0,
       "value": [
-       -78,
+       -112,
        0,
        0
       ],
@@ -3191,7 +3256,7 @@
      {
       "time": 0.8,
       "value": [
-       -82,
+       -114,
        0,
        0
       ],
@@ -3200,7 +3265,7 @@
      {
       "time": 1.6,
       "value": [
-       -78,
+       -112,
        0,
        0
       ],
@@ -3214,27 +3279,56 @@
     {
      "time": 0,
      "value": [
-      -42,
-      0,
-      6
+      -58,
+      10,
+      4
      ],
      "interpolation": "smooth"
     },
     {
      "time": 0.8,
      "value": [
-      -44,
-      0,
-      6
+      -60,
+      10,
+      4
      ],
      "interpolation": "smooth"
     },
     {
      "time": 1.6,
      "value": [
-      -42,
+      -58,
+      10,
+      4
+     ],
+     "interpolation": "smooth"
+    }
+   ],
+   "position": [
+    {
+     "time": 0,
+     "value": [
       0,
-      6
+      -5.7,
+      0
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 0.8,
+     "value": [
+      0,
+      -6.2,
+      0
+     ],
+     "interpolation": "smooth"
+    },
+    {
+     "time": 1.6,
+     "value": [
+      0,
+      -5.7,
+      0
      ],
      "interpolation": "smooth"
     }
