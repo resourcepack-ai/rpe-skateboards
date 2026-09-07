@@ -6447,32 +6447,156 @@
   "length": 1.6,
   "loop": true,
   "animators": {
-   "head": {
+   "rightLeg": {
     "rotation": [
      {
       "time": 0,
       "value": [
-       -18,
-       -42,
-       -46
+       58,
+       0,
+       -32
       ],
       "interpolation": "smooth"
      },
      {
       "time": 0.8,
       "value": [
-       -20,
-       -44,
-       -48
+       60,
+       0,
+       -32
       ],
       "interpolation": "smooth"
      },
      {
       "time": 1.6,
       "value": [
-       -18,
+       58,
+       0,
+       -32
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "rightShin": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -96,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.8,
+      "value": [
+       -98,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.6,
+      "value": [
+       -96,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "leftLeg": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       70,
+       0,
+       -54
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.8,
+      "value": [
+       72,
+       0,
+       -54
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.6,
+      "value": [
+       70,
+       0,
+       -54
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "leftShin": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -118,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.8,
+      "value": [
+       -120,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.6,
+      "value": [
+       -118,
+       0,
+       0
+      ],
+      "interpolation": "smooth"
+     }
+    ]
+   },
+   "head": {
+    "rotation": [
+     {
+      "time": 0,
+      "value": [
+       -6,
+       -40,
+       -36
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 0.8,
+      "value": [
+       -8,
        -42,
-       -46
+       -38
+      ],
+      "interpolation": "smooth"
+     },
+     {
+      "time": 1.6,
+      "value": [
+       -6,
+       -40,
+       -36
       ],
       "interpolation": "smooth"
      }
@@ -6601,130 +6725,6 @@
       "interpolation": "smooth"
      }
     ]
-   },
-   "rightLeg": {
-    "rotation": [
-     {
-      "time": 0,
-      "value": [
-       60,
-       0,
-       16
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.8,
-      "value": [
-       62,
-       0,
-       16
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 1.6,
-      "value": [
-       60,
-       0,
-       16
-      ],
-      "interpolation": "smooth"
-     }
-    ]
-   },
-   "rightShin": {
-    "rotation": [
-     {
-      "time": 0,
-      "value": [
-       -100,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.8,
-      "value": [
-       -102,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 1.6,
-      "value": [
-       -100,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     }
-    ]
-   },
-   "leftLeg": {
-    "rotation": [
-     {
-      "time": 0,
-      "value": [
-       72,
-       0,
-       -6
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.8,
-      "value": [
-       74,
-       0,
-       -6
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 1.6,
-      "value": [
-       72,
-       0,
-       -6
-      ],
-      "interpolation": "smooth"
-     }
-    ]
-   },
-   "leftShin": {
-    "rotation": [
-     {
-      "time": 0,
-      "value": [
-       -122,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 0.8,
-      "value": [
-       -124,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     },
-     {
-      "time": 1.6,
-      "value": [
-       -122,
-       0,
-       0
-      ],
-      "interpolation": "smooth"
-     }
-    ]
    }
   },
   "root": {
@@ -6732,27 +6732,27 @@
     {
      "time": 0,
      "value": [
-      -22,
-      -28,
-      58
+      -12,
+      -24,
+      48
      ],
      "interpolation": "smooth"
     },
     {
      "time": 0.8,
      "value": [
+      -14,
       -24,
-      -28,
-      60
+      50
      ],
      "interpolation": "smooth"
     },
     {
      "time": 1.6,
      "value": [
-      -22,
-      -28,
-      58
+      -12,
+      -24,
+      48
      ],
      "interpolation": "smooth"
     }
