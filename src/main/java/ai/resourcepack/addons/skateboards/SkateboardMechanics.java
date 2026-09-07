@@ -5,7 +5,6 @@ import ai.resourcepack.engine.api.Vehicle;
 import ai.resourcepack.engine.api.VehicleInput;
 import ai.resourcepack.engine.api.VehicleState;
 import ai.resourcepack.engine.api.event.VehicleExitEvent;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -21,6 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.BooleanSupplier;
+import java.util.function.Supplier;
 
 /**
  * How a skateboard is ridden, on top of how the engine drives it.
@@ -111,14 +112,42 @@ final class SkateboardMechanics implements Listener {
     static final double REGULAR_YAW = 90;
     static final double GOOFY_YAW = 270;
 
+    /**
+     * Where a rider faces while tucked: straight down the board, whichever
+     * stance they ride.
+     *
+     * <p><strong>The tuck is the one pose the rider turns for, and the turn is
+     * what makes it possible at all.</strong> A downhill tuck is a fold
+     * FORWARD - chest over the thighs, back flat, head up looking down the
+     * road - and a skater stands across the board, so down the road is
+     * sideways to them. A Minecraft rig cannot fold sideways: its knees hinge
+     * one way, and its root turns the whole figure about the hip, so the angle
+     * that leans the legs toward the nose leans the body toward the tail.
+     * Three goes at authoring around that produced a rider folded into a ball
+     * on the deck. Turning them to face the nose makes the tuck an ordinary
+     * forward fold, which the rig does perfectly - and squaring your shoulders
+     * down the road is what a tucking skater does anyway. The price is that
+     * both feet come round with them.
+     */
+    static final double TUCK_YAW = 0;
+
     private final Plugin plugin;
     private final RPEnginePlugin engine;
     private final Map<UUID, Ride> rides = new HashMap<>();
+    /**
+     * Read fresh every time rather than held, so {@code /skateboard reload}
+     * reaches a rider who is already on a board.
+     */
+    private final Supplier<Messages> messages;
+    private final BooleanSupplier bailing;
 
-    SkateboardMechanics(Plugin plugin, RPEnginePlugin engine, Stance stance) {
+    SkateboardMechanics(Plugin plugin, RPEnginePlugin engine, Stance stance,
+                        Supplier<Messages> messages, BooleanSupplier bailing) {
         this.plugin = plugin;
         this.engine = engine;
         this.stance = stance;
+        this.messages = messages;
+        this.bailing = bailing;
     }
 
     /** A rider changed stance mid-ride: turn them and re-dress them now. */
@@ -126,7 +155,8 @@ final class SkateboardMechanics implements Listener {
         engine.vehicles().of(rider).ifPresent(board -> {
             Ride ride = rides.get(board.uniqueId());
             if (ride != null) {
-                ride.turned = false;
+                ride.known = false;
+                ride.facing = null;
                 ride.worn = null;
             }
         });
@@ -141,9 +171,11 @@ final class SkateboardMechanics implements Listener {
         boolean flicked;
         boolean limited;
         Location last;
-        /** Whether the rider's stance has been applied to this ride yet. */
-        boolean turned;
         boolean goofy;
+        /** Whether this ride has read the rider's stance yet. */
+        boolean known;
+        /** The seat yaw the rider is currently turned to, or null for none yet. */
+        Double facing;
         /** What the rider is currently dressed in, so a change is one call. */
         String worn;
     }
@@ -192,10 +224,9 @@ final class SkateboardMechanics implements Listener {
     }
 
     private void ride(Vehicle board, Player rider, Ride ride) {
-        if (!ride.turned) {
+        if (!ride.known) {
             ride.goofy = stance.isGoofy(rider);
-            board.turnOccupant(rider, ride.goofy ? GOOFY_YAW : REGULAR_YAW);
-            ride.turned = true;
+            ride.known = true;
         }
         VehicleInput input = board.input();
         double speed = board.groundSpeed();
@@ -214,12 +245,25 @@ final class SkateboardMechanics implements Listener {
         ride.wasAirborne = airborne;
         ride.last = now;
 
+        // Which way the rider stands on the board: their stance, except while
+        // tucked, when they square up down the board. See TUCK_YAW.
+        face(board, rider, ride, ride.tucking ? TUCK_YAW : ride.goofy ? GOOFY_YAW : REGULAR_YAW);
+
         // Whatever the board is doing, unless a push or a tuck is in progress:
         // the rider is dressed from here rather than from the seat's table,
         // because the seat's table cannot know their stance.
         if (!ride.tucking && ride.pushEmoteLeft == 0) {
             wear(board, rider, ride, stateEmote(board, ride.goofy));
         }
+    }
+
+    /** Turns the rider to {@code yaw}, only when it changes. */
+    private static void face(Vehicle board, Player rider, Ride ride, double yaw) {
+        if (ride.facing != null && ride.facing == yaw) {
+            return;
+        }
+        ride.facing = yaw;
+        board.turnOccupant(rider, yaw);
     }
 
     private void onTheGround(Vehicle board, Player rider, VehicleInput input, double speed, Ride ride) {
@@ -304,9 +348,12 @@ final class SkateboardMechanics implements Listener {
         double travelYaw = Math.toDegrees(Math.atan2(-dx, dz));
         double off = Math.abs(wrap180(travelYaw - board.heading()));
         if (off >= BAIL_FROM && off <= BAIL_TO) {
-            bail(board, rider);
+            // Turned off in config.yml, a sideways landing simply carries on.
+            if (bailing.getAsBoolean()) {
+                bail(board, rider);
+            }
         } else if (ride.flicked) {
-            rider.sendMessage(SkateboardsPlugin.prefix() + (off > BAIL_TO ? "Fakie!" : "Landed it."));
+            rider.sendMessage(messages.get().get(off > BAIL_TO ? "fakie" : "landed"));
         }
     }
 
@@ -314,8 +361,7 @@ final class SkateboardMechanics implements Listener {
         board.eject(rider);
         board.stop();
         rider.damage(1.0);
-        rider.sendMessage(SkateboardsPlugin.prefix() + ChatColor.RED + "Bailed! " + ChatColor.GRAY
-                + "Land it straight (or straight backwards) next time.");
+        rider.sendMessage(messages.get().get("bailed"));
         rider.getWorld().playSound(rider.getLocation(), Sound.ENTITY_PLAYER_HURT, 0.6f, 1.0f);
     }
 

@@ -1,0 +1,36 @@
+# Skateboards for RP Engine.
+#
+# Everything the plugin says is here, and so is whether it is allowed to
+# throw you off. The board itself - its model, its speed, its seat, its rider
+# animations - is not: that is ordinary RP Engine content, installed into
+# plugins/RPEngine/content/skateboards/, and you can edit it there.
+#
+# Colours are the usual & codes. /skateboard reload picks up a change to this
+# file without a restart.
+
+# What every message is said behind. Set it to "" for none.
+prefix: "&bSkateboards &7"
+
+# Land the board a long way round from the way it is travelling and the rider
+# comes off it, takes half a heart and gets told so. Straight is fine and so
+# is straight backwards - it is the sideways landing that bails you.
+#
+# Set this to false and a sideways landing simply carries on. Nothing else
+# changes: the flick, the fakie and the "landed it" message are all still
+# there, and the rider still has to be ON the board to do any of them.
+bail: true
+
+messages:
+  players-only: "Only a player can hold a skateboard."
+  given: "Here's a board. Right-click the ground to set it down, W to push, S to push it backwards, hold sprint to tuck, space to ollie, A/D in the air to spin it. /skateboard stance right if you ride right foot forward."
+  no-item: "The engine has no skateboard item yet - has it finished loading? Try /rp reload."
+  placed: "Board's down. Right-click it to step on."
+  place-failed: "Couldn't set a board down there."
+  # {stance} is "left" or "right" - which foot leads.
+  stance-current: "You ride &f{stance} foot forward&7. /skateboard stance left|right to change."
+  stance-set: "You ride &f{stance} foot forward&7 now."
+  stance-set-riding: "You ride &f{stance} foot forward&7 now - turning you round."
+  landed: "Landed it."
+  fakie: "Fakie!"
+  bailed: "&cBailed! &7Land it straight (or straight backwards) next time."
+  reloaded: "Config reloaded."

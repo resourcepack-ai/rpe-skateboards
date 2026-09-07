@@ -3,7 +3,6 @@ package ai.resourcepack.addons.skateboards;
 import ai.resourcepack.engine.RPEnginePlugin;
 import ai.resourcepack.engine.api.ContentId;
 import ai.resourcepack.engine.api.Vehicle;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -46,11 +45,10 @@ public final class SkateboardsPlugin extends JavaPlugin {
     /** The item you carry it as - a different id, because ids are unique across a pack. */
     static final ContentId DECK = ContentId.parse(NAMESPACE + ":deck").orElseThrow();
 
-    private static final String PREFIX = ChatColor.AQUA + "Skateboards " + ChatColor.GRAY;
-
     private RPEnginePlugin engine;
     private SkateboardMechanics mechanics;
     private Stance stance;
+    private Messages messages;
 
     @Override
     public void onEnable() {
@@ -80,8 +78,11 @@ public final class SkateboardsPlugin extends JavaPlugin {
             engine.reload();
         }
 
+        saveDefaultConfig();
+        messages = new Messages(getConfig());
         stance = new Stance(this);
-        mechanics = new SkateboardMechanics(this, engine, stance);
+        mechanics = new SkateboardMechanics(this, engine, stance, this::messages,
+                () -> getConfig().getBoolean("bail", true));
         getServer().getPluginManager().registerEvents(mechanics, this);
         getServer().getScheduler().runTaskTimer(this, mechanics::tick, 1L, 1L);
         getLogger().info("Skate or die. /skateboard for a board.");
@@ -89,8 +90,15 @@ public final class SkateboardsPlugin extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (args.length > 0 && args[0].equalsIgnoreCase("reload")
+                && sender.hasPermission("skateboards.reload")) {
+            reloadConfig();
+            messages = new Messages(getConfig());
+            sender.sendMessage(messages.get("reloaded"));
+            return true;
+        }
         if (!(sender instanceof Player)) {
-            sender.sendMessage(PREFIX + "Only a player can hold a skateboard.");
+            sender.sendMessage(messages.get("players-only"));
             return true;
         }
         Player player = (Player) sender;
@@ -102,14 +110,15 @@ public final class SkateboardsPlugin extends JavaPlugin {
             boolean right = word.equals("right") || word.equals("goofy");
             boolean left = word.equals("left") || word.equals("regular");
             if (!left && !right) {
-                player.sendMessage(PREFIX + "You ride " + ChatColor.WHITE + (stance.isGoofy(player) ? "right" : "left")
-                        + " foot forward" + ChatColor.GRAY + ". /skateboard stance left|right to change.");
+                player.sendMessage(messages.get("stance-current",
+                        "stance", stance.isGoofy(player) ? "right" : "left"));
                 return true;
             }
             stance.set(player, right);
             mechanics.restance(player);
-            player.sendMessage(PREFIX + "You ride " + ChatColor.WHITE + (right ? "right" : "left") + " foot forward"
-                    + ChatColor.GRAY + " now" + (engine.vehicles().isRiding(player.getUniqueId()) ? " - turning you round." : "."));
+            player.sendMessage(messages.get(
+                    engine.vehicles().isRiding(player.getUniqueId()) ? "stance-set-riding" : "stance-set",
+                    "stance", right ? "right" : "left"));
             return true;
         }
         if (args.length > 0 && args[0].equalsIgnoreCase("here")) {
@@ -122,27 +131,24 @@ public final class SkateboardsPlugin extends JavaPlugin {
             ahead.setZ(Math.floor(ahead.getZ()) + 0.5);
             ahead.setY(Math.floor(ahead.getY()));
             Optional<Vehicle> board = engine.vehicles().spawn(ahead, BOARD);
-            player.sendMessage(PREFIX + (board.isPresent()
-                    ? "Board's down. Right-click it to step on."
-                    : "Couldn't set a board down there."));
+            player.sendMessage(messages.get(board.isPresent() ? "placed" : "place-failed"));
             return true;
         }
         Optional<ItemStack> item = engine.items().create(DECK);
         if (item.isEmpty()) {
-            player.sendMessage(PREFIX + "The engine has no skateboard item yet - has it finished loading? Try /rp reload.");
+            player.sendMessage(messages.get("no-item"));
             return true;
         }
         Map<Integer, ItemStack> left = player.getInventory().addItem(item.get());
         for (ItemStack overflow : left.values()) {
             player.getWorld().dropItemNaturally(player.getLocation(), overflow);
         }
-        player.sendMessage(PREFIX + "Here's a board. Right-click the ground to set it down, "
-                + "W to push, hold sprint to tuck, space to ollie, A/D in the air to spin it. "
-                + "/skateboard stance right if you ride right foot forward.");
+        player.sendMessage(messages.get("given"));
         return true;
     }
 
-    static String prefix() {
-        return PREFIX;
+    /** Every string the plugin says, as the config has them right now. */
+    Messages messages() {
+        return messages;
     }
 }
