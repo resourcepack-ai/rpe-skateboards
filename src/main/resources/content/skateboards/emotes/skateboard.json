@@ -6452,27 +6452,27 @@
      {
       "time": 0,
       "value": [
-       -52,
-       -62,
-       0
+       -18,
+       -42,
+       -46
       ],
       "interpolation": "smooth"
      },
      {
       "time": 0.8,
       "value": [
-       -55,
-       -64,
-       0
+       -20,
+       -44,
+       -48
       ],
       "interpolation": "smooth"
      },
      {
       "time": 1.6,
       "value": [
-       -52,
-       -62,
-       0
+       -18,
+       -42,
+       -46
       ],
       "interpolation": "smooth"
      }
@@ -6732,27 +6732,27 @@
     {
      "time": 0,
      "value": [
-      -70,
-      -8,
-      -2
+      -22,
+      -28,
+      58
      ],
      "interpolation": "smooth"
     },
     {
      "time": 0.8,
      "value": [
-      -72,
-      -8,
-      -2
+      -24,
+      -28,
+      60
      ],
      "interpolation": "smooth"
     },
     {
      "time": 1.6,
      "value": [
-      -70,
-      -8,
-      -2
+      -22,
+      -28,
+      58
      ],
      "interpolation": "smooth"
     }
