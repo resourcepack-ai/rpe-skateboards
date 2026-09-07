@@ -60,8 +60,13 @@ final class SkateboardMechanics implements Listener {
     static final double PUSH_BOOST = 2.4;
     /** Ticks between kicks while W is held. */
     static final int PUSH_INTERVAL = 14;
-    /** How long the push emote is worn per kick, ticks. */
-    static final int PUSH_EMOTE_TICKS = 12;
+    /**
+     * How long the push emote is worn per kick, ticks. The SAME as
+     * {@link #PUSH_INTERVAL} and the emote's own length (0.7 s), so one kick
+     * plays exactly one cycle; worn shorter, the emote was cut mid-stride on
+     * every kick and the rider jittered.
+     */
+    static final int PUSH_EMOTE_TICKS = 14;
     /** Speed cap while standing up. The definition's own top speed is the tucked one. */
     static final double CRUISE_LIMIT = 9.0;
     /** Speed picked up per tick while tucked and moving, blocks per second. */
