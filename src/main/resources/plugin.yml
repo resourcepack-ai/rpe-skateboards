@@ -1,0 +1,21 @@
+name: RPESkateboards
+main: ai.resourcepack.addons.skateboards.SkateboardsPlugin
+version: ${version}
+api-version: '1.19'
+description: Skateboards for RP Engine - push, tuck, jump, flick it round, and try not to bail.
+author: ResourcePack AI
+# Hard, not soft: there is nothing here without the engine. The board, its
+# item, its animations and its physics are all the engine's; this plugin is
+# the skating on top.
+depend: [RPEngine]
+
+commands:
+  skateboard:
+    description: Get a skateboard, or set one down in front of you.
+    usage: /<command> [here]
+    permission: skateboards.use
+
+permissions:
+  skateboards.use:
+    description: Get and ride a skateboard.
+    default: true

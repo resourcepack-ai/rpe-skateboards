@@ -1,0 +1,11 @@
+# The board you carry. Right-click the ground with it and the engine parks
+# the vehicle, because this is the item its `model:` names. Called `deck`
+# rather than `skateboard` because an id is unique across a whole pack,
+# categories included, and `skateboard` is the vehicle.
+deck:
+  material: PAPER
+  model: skateboard
+  name: "&bSkateboard"
+  lore:
+    - "&7Right-click the ground to set it down."
+    - "&7Sneak and right-click it to pick it up."

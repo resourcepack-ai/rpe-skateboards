@@ -1,0 +1,40 @@
+skateboard:
+  model: skateboards:deck
+  name: "&bSkateboard"
+  medium: land
+  # `speed` is the TUCKED top speed. Standing up, the plugin caps it lower
+  # (SkateboardMechanics.CRUISE_LIMIT) and only the tuck lifts the cap.
+  speed: 13
+  # Almost no throttle of its own: W does not drive a skateboard, pushing
+  # does, and the plugin does the pushing with Vehicle.nudge.
+  acceleration: 0.6
+  turn-speed: 160
+  weight: 10
+  scale: 0.5
+  # Space is an ollie, not a handbrake.
+  jump: true
+  hitbox:
+    width: 0.5
+    height: 0.5
+    length: 1.5
+  seats:
+    # Side-on, regular stance: chest to the board's right, left foot leading,
+    # head turned to look down the board. Standing, on the deck.
+    - role: driver
+      x: 0
+      y: 0.625
+      z: 0
+      yaw: 90
+      pose: standing
+      animations:
+        airborne: skateboards_airborne
+        turning: skateboards_turning
+        reversing: skateboards_reversing
+        moving: skateboards_moving
+        idle: skateboards_idle
+  animations:
+    airborne: airborne
+    turning: turning
+    reversing: reversing
+    moving: moving
+    idle: idle

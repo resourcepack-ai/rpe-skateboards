@@ -1,0 +1,76 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version '8.3.5'
+}
+
+group = 'ai.resourcepack.addons'
+version = '0.1.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// The same floor as the engine, for the same reason: the engine runs on
+// Minecraft 1.19.4, a 1.19.4 server runs on Java 17, and a Java 17 runtime
+// cannot load a Java 21 class file at all. An addon that needs the engine
+// cannot be loadable on fewer servers than the engine is.
+tasks.withType(JavaCompile).configureEach {
+    options.release = 17
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+}
+
+// The engine's jar, built beside this project. compileOnly, because the
+// engine is a plugin the server already has: shading it in would be a second
+// copy of every class, and Bukkit would load whichever it saw first.
+//
+// A file dependency rather than a Maven coordinate because the engine is not
+// published to a repository - it is sold as a jar. Somebody building this
+// addon against a release they downloaded points ENGINE_JAR at it.
+def engineJar = System.getenv('ENGINE_JAR')
+        ? files(System.getenv('ENGINE_JAR'))
+        : fileTree(dir: '../../rp-engine/build/libs', include: 'rp-engine-*.jar', exclude: '*-sources.jar')
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.21.4-R0.1-SNAPSHOT'
+    compileOnly engineJar
+}
+
+tasks.register('checkEngineJar') {
+    doFirst {
+        if (engineJar.files.isEmpty()) {
+            throw new GradleException(
+                    "No RP Engine jar to compile against. Build the engine first (cd ../../rp-engine && ./gradlew build) " +
+                    "or set ENGINE_JAR to a downloaded RPEngine jar.")
+        }
+    }
+}
+compileJava.dependsOn checkEngineJar
+
+processResources {
+    inputs.property('version', project.version)
+    filesMatching('plugin.yml') {
+        expand(version: project.version)
+    }
+}
+
+shadowJar {
+    archiveBaseName.set('RPE-skateboards')
+    archiveClassifier.set('')
+}
+
+// Only the shadow jar: the plain one is the same classes without the name
+// the deploy looks for, and two jars in build/libs is one too many to pick.
+jar {
+    enabled = false
+}
+
+build {
+    dependsOn shadowJar
+}
