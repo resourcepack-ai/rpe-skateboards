@@ -12,7 +12,7 @@ depend: [RPEngine]
 commands:
   skateboard:
     description: Get a skateboard, or set one down in front of you.
-    usage: /<command> [here]
+    usage: /<command> [here | stance <regular|goofy>]
     permission: skateboards.use
 
 permissions:

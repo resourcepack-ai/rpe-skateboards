@@ -81,13 +81,34 @@ final class SkateboardMechanics implements Listener {
     static final String EMOTE_PUSH = "skateboards_push";
     static final String EMOTE_TUCK = "skateboards_tuck";
 
+    /**
+     * The seat is drawn for a regular rider (yaw 90: chest to the board's
+     * right, left foot forward). A goofy rider faces the other way and wears
+     * the mirrored copies of every emote, which the content ships as
+     * {@code <name>_goofy}. See Stance.
+     */
+    static final double REGULAR_YAW = 90;
+    static final double GOOFY_YAW = 270;
+
     private final Plugin plugin;
     private final RPEnginePlugin engine;
     private final Map<UUID, Ride> rides = new HashMap<>();
 
-    SkateboardMechanics(Plugin plugin, RPEnginePlugin engine) {
+    SkateboardMechanics(Plugin plugin, RPEnginePlugin engine, Stance stance) {
         this.plugin = plugin;
         this.engine = engine;
+        this.stance = stance;
+    }
+
+    /** A rider changed stance mid-ride: turn them and re-dress them now. */
+    void restance(Player rider) {
+        engine.vehicles().of(rider).ifPresent(board -> {
+            Ride ride = rides.get(board.uniqueId());
+            if (ride != null) {
+                ride.turned = false;
+                ride.worn = null;
+            }
+        });
     }
 
     /** What one board is up to. */
@@ -99,6 +120,40 @@ final class SkateboardMechanics implements Listener {
         boolean flicked;
         boolean limited;
         Location last;
+        /** Whether the rider's stance has been applied to this ride yet. */
+        boolean turned;
+        boolean goofy;
+        /** What the rider is currently dressed in, so a change is one call. */
+        String worn;
+    }
+
+    private final Stance stance;
+
+    /** The emote a rider wears for what the board is doing, in their stance. */
+    private static String stateEmote(Vehicle board, boolean goofy) {
+        String base;
+        if (board.is(VehicleState.AIRBORNE)) {
+            base = "skateboards_airborne";
+        } else if (board.is(VehicleState.TURNING)) {
+            base = "skateboards_turning";
+        } else if (board.is(VehicleState.REVERSING)) {
+            base = "skateboards_reversing";
+        } else if (board.is(VehicleState.MOVING)) {
+            base = "skateboards_moving";
+        } else {
+            base = "skateboards_idle";
+        }
+        return goofy ? base + "_goofy" : base;
+    }
+
+    /** Dresses the rider in {@code emote}, in their stance, only when it changes. */
+    private static void wear(Vehicle board, Player rider, Ride ride, String emote) {
+        String wanted = ride.goofy && !emote.endsWith("_goofy") ? emote + "_goofy" : emote;
+        if (wanted.equals(ride.worn)) {
+            return;
+        }
+        ride.worn = wanted;
+        board.dress(rider, wanted);
     }
 
     void tick() {
@@ -116,6 +171,11 @@ final class SkateboardMechanics implements Listener {
     }
 
     private void ride(Vehicle board, Player rider, Ride ride) {
+        if (!ride.turned) {
+            ride.goofy = stance.isGoofy(rider);
+            board.turnOccupant(rider, ride.goofy ? GOOFY_YAW : REGULAR_YAW);
+            ride.turned = true;
+        }
         VehicleInput input = board.input();
         double speed = board.groundSpeed();
         boolean airborne = board.is(VehicleState.AIRBORNE);
@@ -132,29 +192,30 @@ final class SkateboardMechanics implements Listener {
 
         ride.wasAirborne = airborne;
         ride.last = now;
+
+        // Whatever the board is doing, unless a push or a tuck is in progress:
+        // the rider is dressed from here rather than from the seat's table,
+        // because the seat's table cannot know their stance.
+        if (!ride.tucking && ride.pushEmoteLeft == 0) {
+            wear(board, rider, ride, stateEmote(board, ride.goofy));
+        }
     }
 
     private void onTheGround(Vehicle board, Player rider, VehicleInput input, double speed, Ride ride) {
         if (ride.pushCooldown > 0) {
             ride.pushCooldown--;
         }
-        if (ride.pushEmoteLeft > 0 && --ride.pushEmoteLeft == 0 && !ride.tucking) {
-            board.undress(rider);
+        if (ride.pushEmoteLeft > 0) {
+            ride.pushEmoteLeft--;
         }
 
         // Tuck: sprint held while rolling. The cap comes off, the rider
         // crouches, and the board creeps toward its real top speed.
         boolean tuck = input.sprint() && speed > TUCK_MIN_SPEED && !input.backward();
-        if (tuck != ride.tucking) {
-            ride.tucking = tuck;
-            if (tuck) {
-                board.dress(rider, EMOTE_TUCK);
-            } else {
-                board.undress(rider);
-            }
-        }
+        ride.tucking = tuck;
         limit(board, ride, !tuck);
         if (tuck) {
+            wear(board, rider, ride, EMOTE_TUCK);
             board.nudge(TUCK_GAIN);
             return;
         }
@@ -163,7 +224,7 @@ final class SkateboardMechanics implements Listener {
         if (input.forward() && speed < PUSH_CAP) {
             if (ride.pushCooldown == 0) {
                 board.nudge(Math.min(PUSH_BOOST, PUSH_CAP + 0.5 - speed));
-                board.dress(rider, EMOTE_PUSH);
+                wear(board, rider, ride, EMOTE_PUSH);
                 ride.pushCooldown = PUSH_INTERVAL;
                 ride.pushEmoteLeft = PUSH_EMOTE_TICKS;
                 rider.getWorld().playSound(board.location(), Sound.BLOCK_STONE_STEP, 0.4f, 0.8f);
@@ -181,12 +242,10 @@ final class SkateboardMechanics implements Listener {
     private void inTheAir(Vehicle board, VehicleInput input, Ride ride) {
         if (!ride.wasAirborne) {
             ride.flicked = false;
-            if (ride.pushEmoteLeft > 0 || ride.tucking) {
-                // The airborne state's own emote is the tuck-and-grab; let it play.
-                ride.pushEmoteLeft = 0;
-                ride.tucking = false;
-                board.driver().ifPresent(board::undress);
-            }
+            // The airborne emote is the tuck-and-grab; a push or a tuck in
+            // progress gives way to it.
+            ride.pushEmoteLeft = 0;
+            ride.tucking = false;
         }
         if (!ride.flicked && (input.left() || input.right())) {
             board.spin(input.right() ? SPIN : -SPIN);

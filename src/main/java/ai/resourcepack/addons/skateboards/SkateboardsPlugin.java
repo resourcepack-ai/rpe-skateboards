@@ -50,6 +50,7 @@ public final class SkateboardsPlugin extends JavaPlugin {
 
     private RPEnginePlugin engine;
     private SkateboardMechanics mechanics;
+    private Stance stance;
 
     @Override
     public void onEnable() {
@@ -79,7 +80,8 @@ public final class SkateboardsPlugin extends JavaPlugin {
             engine.reload();
         }
 
-        mechanics = new SkateboardMechanics(this, engine);
+        stance = new Stance(this);
+        mechanics = new SkateboardMechanics(this, engine, stance);
         getServer().getPluginManager().registerEvents(mechanics, this);
         getServer().getScheduler().runTaskTimer(this, mechanics::tick, 1L, 1L);
         getLogger().info("Skate or die. /skateboard for a board.");
@@ -92,6 +94,19 @@ public final class SkateboardsPlugin extends JavaPlugin {
             return true;
         }
         Player player = (Player) sender;
+        if (args.length > 0 && args[0].equalsIgnoreCase("stance")) {
+            if (args.length < 2 || !(args[1].equalsIgnoreCase("regular") || args[1].equalsIgnoreCase("goofy"))) {
+                player.sendMessage(PREFIX + "You ride " + ChatColor.WHITE + (stance.isGoofy(player) ? "goofy" : "regular")
+                        + ChatColor.GRAY + ". /skateboard stance regular|goofy to change - regular is left foot forward, goofy is right.");
+                return true;
+            }
+            boolean goofy = args[1].equalsIgnoreCase("goofy");
+            stance.set(player, goofy);
+            mechanics.restance(player);
+            player.sendMessage(PREFIX + "You ride " + ChatColor.WHITE + (goofy ? "goofy" : "regular") + ChatColor.GRAY
+                    + " now" + (engine.vehicles().isRiding(player.getUniqueId()) ? " - turning you round." : "."));
+            return true;
+        }
         if (args.length > 0 && args[0].equalsIgnoreCase("here")) {
             Location ahead = player.getLocation().clone();
             Vector forward = ahead.getDirection().setY(0);
@@ -117,7 +132,8 @@ public final class SkateboardsPlugin extends JavaPlugin {
             player.getWorld().dropItemNaturally(player.getLocation(), overflow);
         }
         player.sendMessage(PREFIX + "Here's a board. Right-click the ground to set it down, "
-                + "W to push, hold sprint to tuck, space to ollie, A/D in the air to spin it.");
+                + "W to push, hold sprint to tuck, space to ollie, A/D in the air to spin it. "
+                + "/skateboard stance goofy if you ride right foot forward.");
         return true;
     }
 
