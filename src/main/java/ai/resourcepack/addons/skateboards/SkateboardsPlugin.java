@@ -95,16 +95,21 @@ public final class SkateboardsPlugin extends JavaPlugin {
         }
         Player player = (Player) sender;
         if (args.length > 0 && args[0].equalsIgnoreCase("stance")) {
-            if (args.length < 2 || !(args[1].equalsIgnoreCase("regular") || args[1].equalsIgnoreCase("goofy"))) {
-                player.sendMessage(PREFIX + "You ride " + ChatColor.WHITE + (stance.isGoofy(player) ? "goofy" : "regular")
-                        + ChatColor.GRAY + ". /skateboard stance regular|goofy to change - regular is left foot forward, goofy is right.");
+            // Named by the foot that leads: left foot forward or right foot
+            // forward. Skaters call those regular and goofy, and those words
+            // are accepted too, but nobody should have to know them.
+            String word = args.length > 1 ? args[1].toLowerCase() : "";
+            boolean right = word.equals("right") || word.equals("goofy");
+            boolean left = word.equals("left") || word.equals("regular");
+            if (!left && !right) {
+                player.sendMessage(PREFIX + "You ride " + ChatColor.WHITE + (stance.isGoofy(player) ? "right" : "left")
+                        + " foot forward" + ChatColor.GRAY + ". /skateboard stance left|right to change.");
                 return true;
             }
-            boolean goofy = args[1].equalsIgnoreCase("goofy");
-            stance.set(player, goofy);
+            stance.set(player, right);
             mechanics.restance(player);
-            player.sendMessage(PREFIX + "You ride " + ChatColor.WHITE + (goofy ? "goofy" : "regular") + ChatColor.GRAY
-                    + " now" + (engine.vehicles().isRiding(player.getUniqueId()) ? " - turning you round." : "."));
+            player.sendMessage(PREFIX + "You ride " + ChatColor.WHITE + (right ? "right" : "left") + " foot forward"
+                    + ChatColor.GRAY + " now" + (engine.vehicles().isRiding(player.getUniqueId()) ? " - turning you round." : "."));
             return true;
         }
         if (args.length > 0 && args[0].equalsIgnoreCase("here")) {
@@ -133,7 +138,7 @@ public final class SkateboardsPlugin extends JavaPlugin {
         }
         player.sendMessage(PREFIX + "Here's a board. Right-click the ground to set it down, "
                 + "W to push, hold sprint to tuck, space to ollie, A/D in the air to spin it. "
-                + "/skateboard stance goofy if you ride right foot forward.");
+                + "/skateboard stance right if you ride right foot forward.");
         return true;
     }
 
