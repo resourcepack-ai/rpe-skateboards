@@ -1,0 +1,274 @@
+{
+ "parent": "block/block",
+ "textures": {
+  "atlas": "block/park_stair_set_wide",
+  "particle": "block/park_stair_set_wide"
+ },
+ "elements": [
+  {
+   "name": "step_1",
+   "from": [
+    -16,
+    0,
+    16
+   ],
+   "to": [
+    32,
+    8,
+    24
+   ],
+   "faces": {
+    "south": {
+     "uv": [
+      7,
+      4,
+      13,
+      5
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      6,
+      6,
+      7,
+      7
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      6,
+      6,
+      7,
+      7
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      6,
+      6,
+      7
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      7,
+      4,
+      13,
+      5
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "step_2",
+   "from": [
+    -16,
+    0,
+    8
+   ],
+   "to": [
+    32,
+    16,
+    16
+   ],
+   "faces": {
+    "south": {
+     "uv": [
+      0,
+      4,
+      6,
+      6
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      6,
+      4,
+      7,
+      6
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      6,
+      4,
+      7,
+      6
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      6,
+      6,
+      7
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      7,
+      4,
+      13,
+      5
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "step_3",
+   "from": [
+    -16,
+    0,
+    0
+   ],
+   "to": [
+    32,
+    24,
+    8
+   ],
+   "faces": {
+    "south": {
+     "uv": [
+      7,
+      0,
+      13,
+      3
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      13,
+      0,
+      14,
+      3
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      13,
+      0,
+      14,
+      3
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      6,
+      6,
+      7
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      7,
+      4,
+      13,
+      5
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "step_4",
+   "from": [
+    -16,
+    0,
+    -8
+   ],
+   "to": [
+    32,
+    32,
+    0
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      0,
+      0,
+      6,
+      4
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      0,
+      0,
+      6,
+      4
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      6,
+      0,
+      7,
+      4
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      6,
+      0,
+      7,
+      4
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      6,
+      6,
+      7
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      7,
+      4,
+      13,
+      5
+     ],
+     "texture": "#atlas"
+    }
+   }
+  }
+ ],
+ "groups": [
+  {
+   "name": "stair_set",
+   "origin": [
+    8,
+    0,
+    8
+   ],
+   "children": [
+    0,
+    1,
+    2,
+    3
+   ]
+  }
+ ]
+}

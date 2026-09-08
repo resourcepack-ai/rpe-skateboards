@@ -13,6 +13,10 @@ skateboard:
   scale: 0.5
   # Space is an ollie, not a handbrake.
   jump: true
+  # Jump at a wall fast enough and shallow enough and the board holds itself
+  # against it until the speed runs out. The engine does the physics; the
+  # plugin only dresses the rider for it (Vehicle.wallRiding).
+  wall-ride: true
   # The wheel cycle is driven by how far the board has ROLLED rather than by
   # how long it has been playing: at the tucked top speed it runs at the rate
   # it was drawn at, at a crawl it crawls, and standing still it stops with

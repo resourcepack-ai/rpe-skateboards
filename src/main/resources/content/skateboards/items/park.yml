@@ -61,6 +61,16 @@ park_step_block:
   place:
     facing: cardinal
 
+park_kicker:
+  material: PAPER
+  model: park_kicker
+  name: "&bConcrete Kicker Ramp"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
 park_bank_ramp:
   material: PAPER
   model: park_bank_ramp
@@ -85,6 +95,26 @@ park_quarter_pipe:
   material: PAPER
   model: park_quarter_pipe
   name: "&bMunicipal Quarter Pipe"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_quarter_pipe_big:
+  material: PAPER
+  model: park_quarter_pipe_big
+  name: "&bMunicipal Quarter Pipe"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_spine:
+  material: PAPER
+  model: park_spine
+  name: "&bConcrete Spine Ramp"
   lore:
     - "&7Right-click the ground to place it."
     - "&7Punch it to take it back."
@@ -140,3 +170,66 @@ park_flat_rail:
     - "&7Punch it to take it back."
   place:
     facing: cardinal
+    # 1 blocks tall, from a model built 12.0003 units tall.
+    scale: 1.3333
+
+park_flat_rail_long:
+  material: PAPER
+  model: park_flat_rail_long
+  name: "&bMunicipal Long Flat Bar"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_stair_set:
+  material: PAPER
+  model: park_stair_set
+  name: "&bFour Step Concrete Stair Set"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_stair_set_wide:
+  material: PAPER
+  model: park_stair_set_wide
+  name: "&bWide Four Step Stair Set"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_stair_set_rail:
+  material: PAPER
+  model: park_stair_set_rail
+  name: "&bFour Step Handrail Set"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_gap_block:
+  material: PAPER
+  model: park_gap_block
+  name: "&bSkatepark Gap Block"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_park_bench:
+  material: PAPER
+  model: park_park_bench
+  name: "&bSkatepark Plinth Bench"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+    seat: 0.5

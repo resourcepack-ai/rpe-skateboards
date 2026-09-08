@@ -60,6 +60,12 @@ import java.util.function.Supplier;
  *   <li><b>Rolling.</b> A board coasts a long way, and the engine's road
  *   vehicle does not (its coast floor is a car rolling to a halt). While
  *   nobody is pushing or braking, most of that drag is handed back.</li>
+ *   <li><b>Wall riding.</b> Jump at a wall with speed, at a shallow enough
+ *   angle, and the board holds itself against it - rolled over onto the wall,
+ *   sinking gently, until the speed runs out. All of that is the engine's
+ *   ({@code wall-ride: true} on the vehicle); what is here is the rider's
+ *   pose for it, and keeping the mid-air flick off while it lasts, because a
+ *   board being spun is a board not being ridden.</li>
  *   <li><b>Spinning.</b> A or D in the air flicks the board round under the
  *   rider — one flick per flight, carried by the engine's mid-air spin.</li>
  *   <li><b>Bailing.</b> Land with the board sideways to where it is going
@@ -115,6 +121,7 @@ final class SkateboardMechanics implements Listener {
     static final String EMOTE_PUSH_BACK = "skateboards_pushback";
     static final String EMOTE_TUCK = "skateboards_tuck";
     static final String EMOTE_COFFIN = "skateboards_coffin";
+    static final String EMOTE_WALLRIDE = "skateboards_wallride";
 
     /**
      * The seat is drawn for a regular rider (yaw 90: chest to the board's
@@ -280,7 +287,16 @@ final class SkateboardMechanics implements Listener {
         boolean airborne = board.is(VehicleState.AIRBORNE);
         Location now = board.location();
 
-        if (airborne) {
+        // A wall ride is its own thing and beats both branches: the board is
+        // off the ground but it is not falling, and the rider is holding
+        // themselves on rather than doing anything else.
+        boolean wall = board.wallRiding();
+        if (wall) {
+            ride.coffin = false;
+            ride.tucking = false;
+            ride.flicked = true;
+            wear(board, rider, ride, EMOTE_WALLRIDE);
+        } else if (airborne) {
             inTheAir(board, input, ride);
         } else {
             if (ride.wasAirborne) {
@@ -289,7 +305,7 @@ final class SkateboardMechanics implements Listener {
             onTheGround(board, rider, input, speed, ride);
         }
 
-        ride.wasAirborne = airborne;
+        ride.wasAirborne = airborne && !wall;
         ride.last = now;
 
         // Which way the rider stands on the board: their stance, except lying
@@ -301,7 +317,7 @@ final class SkateboardMechanics implements Listener {
         // Whatever the board is doing, unless a push or a tuck is in progress:
         // the rider is dressed from here rather than from the seat's table,
         // because the seat's table cannot know their stance.
-        if (!ride.tucking && !ride.coffin && ride.pushEmoteLeft == 0) {
+        if (!wall && !ride.tucking && !ride.coffin && ride.pushEmoteLeft == 0) {
             wear(board, rider, ride, stateEmote(board, ride.goofy));
         }
     }
