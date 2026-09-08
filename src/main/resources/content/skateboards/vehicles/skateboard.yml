@@ -13,6 +13,11 @@ skateboard:
   scale: 0.5
   # Space is an ollie, not a handbrake.
   jump: true
+  # The wheel cycle is driven by how far the board has ROLLED rather than by
+  # how long it has been playing: at the tucked top speed it runs at the rate
+  # it was drawn at, at a crawl it crawls, and standing still it stops with
+  # the wheels where they are.
+  animation-follows-speed: true
   hitbox:
     width: 0.5
     height: 0.5
