@@ -185,14 +185,18 @@ final class SkateboardMechanics implements Listener {
      */
     private final Supplier<Messages> messages;
     private final BooleanSupplier bailing;
+    /** Whether the board says anything about what was just ridden. {@code trick-messages}. */
+    private final BooleanSupplier talking;
 
     SkateboardMechanics(Plugin plugin, RPEnginePlugin engine, Stance stance,
-                        Supplier<Messages> messages, BooleanSupplier bailing) {
+                        Supplier<Messages> messages, BooleanSupplier bailing,
+                        BooleanSupplier talking) {
         this.plugin = plugin;
         this.engine = engine;
         this.stance = stance;
         this.messages = messages;
         this.bailing = bailing;
+        this.talking = talking;
     }
 
     /** A rider changed stance mid-ride: turn them and re-dress them now. */
@@ -445,7 +449,7 @@ final class SkateboardMechanics implements Listener {
             if (bailing.getAsBoolean()) {
                 bail(board, rider);
             }
-        } else if (ride.flicked) {
+        } else if (ride.flicked && talking.getAsBoolean()) {
             rider.sendMessage(messages.get().get(off > BAIL_TO ? "fakie" : "landed"));
         }
     }
@@ -454,7 +458,9 @@ final class SkateboardMechanics implements Listener {
         board.eject(rider);
         board.stop();
         rider.damage(1.0);
-        rider.sendMessage(messages.get().get("bailed"));
+        if (talking.getAsBoolean()) {
+            rider.sendMessage(messages.get().get("bailed"));
+        }
         rider.getWorld().playSound(rider.getLocation(), Sound.ENTITY_PLAYER_HURT, 0.6f, 1.0f);
     }
 

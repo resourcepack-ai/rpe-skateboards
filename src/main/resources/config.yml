@@ -20,6 +20,16 @@ prefix: "&b[Skateboards] &7"
 # there, and the rider still has to be ON the board to do any of them.
 bail: true
 
+# Whether the board talks to its rider about what they just did: "Landed it",
+# "Fakie!", and the line that tells you why you are suddenly standing in the
+# road. On by default, because a trick nobody is told they landed is a trick
+# nobody knows they can do.
+#
+# Turn it off for a server where the chat is for people. Nothing else changes:
+# the bail still throws you, the fakie is still a fakie, they just happen
+# quietly.
+trick-messages: true
+
 messages:
   players-only: "Only a player can hold a skateboard."
   given: "Here's a board. Right-click the ground to set it down, W to push, S to push it backwards, hold sprint to tuck, hold shift to lie back, space to ollie, A/D in the air to spin it, and HOLD space against a wall to ride it. Tap shift to step off. /skateboard stance right if you ride right foot forward."

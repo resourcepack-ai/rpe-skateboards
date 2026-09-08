@@ -85,7 +85,8 @@ public final class SkateboardsPlugin extends JavaPlugin {
         stance = new Stance(this);
         park = new Skatepark(engine, this::messages);
         mechanics = new SkateboardMechanics(this, engine, stance, this::messages,
-                () -> getConfig().getBoolean("bail", true));
+                () -> getConfig().getBoolean("bail", true),
+                () -> getConfig().getBoolean("trick-messages", true));
         getServer().getPluginManager().registerEvents(mechanics, this);
         getServer().getScheduler().runTaskTimer(this, mechanics::tick, 1L, 1L);
         getLogger().info("Skate or die. /skateboard for a board, /skatepark for something to ride.");
