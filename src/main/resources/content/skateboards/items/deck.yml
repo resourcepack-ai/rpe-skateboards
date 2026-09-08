@@ -6,6 +6,10 @@ deck:
   material: PAPER
   model: skateboard
   name: "&bSkateboard"
+  # Checked when the item is USED - which for this item means putting a board
+  # down. Having one in your inventory is never refused; taking somebody's
+  # stuff off them is not a decision a plugin should make.
+  permission: skateboards.use
   lore:
     - "&7Right-click the ground to set it down."
     - "&7Sneak and right-click it to pick it up."

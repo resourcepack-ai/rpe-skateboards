@@ -30,6 +30,16 @@ bail: true
 # quietly.
 trick-messages: true
 
+# Give every player a board the first time they join, so nobody has to be
+# told a command exists. Off, because a plugin that puts something in
+# somebody's inventory uninvited is a plugin a server owner has to undo -
+# and a server that wants this usually wants it once rather than every time,
+# which is what `first-join-only` is.
+#
+# Needs `skateboards.use`, so revoking that permission also stops the gift.
+give-on-join: false
+first-join-only: true
+
 messages:
   players-only: "Only a player can hold a skateboard."
   given: "Here's a board. Right-click the ground to set it down, W to push, S to push it backwards, hold sprint to tuck, hold shift to lie back, space to ollie, A/D in the air to spin it, and HOLD space against a wall to ride it. Tap shift to step off. /skateboard stance right if you ride right foot forward."

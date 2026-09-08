@@ -21,7 +21,10 @@ commands:
 
 permissions:
   skateboards.use:
-    description: Get and ride a skateboard.
+    description: Get a skateboard, and put one down.
+    default: true
+  skateboards.ride:
+    description: Get on a skateboard that is already down.
     default: true
   skateboards.park:
     description: Get skatepark pieces to place.

@@ -81,6 +81,7 @@ public final class SkateboardsPlugin extends JavaPlugin {
         saveDefaultConfig();
         messages = new Messages(getConfig());
         stance = new Stance(this);
+        getServer().getPluginManager().registerEvents(new JoinGift(this, engine), this);
         park = new Skatepark(engine, this::messages);
         mechanics = new SkateboardMechanics(this, engine, stance, this::messages,
                 () -> getConfig().getBoolean("bail", true),

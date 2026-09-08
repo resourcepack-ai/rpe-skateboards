@@ -1,6 +1,11 @@
 skateboard:
   model: skateboards:deck
   name: "&bSkateboard"
+  # Checked when somebody gets ON. A board is a thing standing in the world
+  # that anybody can walk up to and right-click, so without this the only
+  # control a server has over who rides is who was given the item - which is
+  # no control at all once one is parked in a public square.
+  permission: skateboards.ride
   medium: land
   # `speed` is the TUCKED top speed. Standing up, the plugin caps it lower
   # (SkateboardMechanics.CRUISE_LIMIT) and only the tuck lifts the cap.
