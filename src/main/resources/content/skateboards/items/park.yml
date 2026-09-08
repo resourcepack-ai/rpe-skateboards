@@ -1,0 +1,142 @@
+# The skatepark. Every piece is placeable and every piece holds a
+# vehicle up on its own cubes, which is what lets a board roll up a
+
+park_flat_slab:
+  material: PAPER
+  model: park_flat_slab
+  name: "&bPark Floor Slab"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: free
+
+park_flat_slab_large:
+  material: PAPER
+  model: park_flat_slab_large
+  name: "&bConcrete Plaza Slab"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: free
+
+park_flat_slab_painted:
+  material: PAPER
+  model: park_flat_slab_painted
+  name: "&bLane Marked Park Slab"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: free
+
+park_platform_low:
+  material: PAPER
+  model: park_platform_low
+  name: "&bLow Concrete Platform"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_platform_high:
+  material: PAPER
+  model: park_platform_high
+  name: "&bQuarter Pipe Deck Platform"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_step_block:
+  material: PAPER
+  model: park_step_block
+  name: "&bConcrete Step Block"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_bank_ramp:
+  material: PAPER
+  model: park_bank_ramp
+  name: "&bConcrete Bank Ramp"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_bank_ramp_wide:
+  material: PAPER
+  model: park_bank_ramp_wide
+  name: "&bWide Concrete Bank"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_quarter_pipe:
+  material: PAPER
+  model: park_quarter_pipe
+  name: "&bMunicipal Quarter Pipe"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_wall_ride:
+  material: PAPER
+  model: park_wall_ride
+  name: "&bMunicipal Wall Ride"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_grind_box:
+  material: PAPER
+  model: park_grind_box
+  name: "&bMunicipal Grind Box"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_manual_pad:
+  material: PAPER
+  model: park_manual_pad
+  name: "&bMunicipal Manual Pad"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_ledge_kerb:
+  material: PAPER
+  model: park_ledge_kerb
+  name: "&bSkate Kerb"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal
+
+park_flat_rail:
+  material: PAPER
+  model: park_flat_rail
+  name: "&bSkatepark Flat Bar"
+  lore:
+    - "&7Right-click the ground to place it."
+    - "&7Punch it to take it back."
+  place:
+    facing: cardinal

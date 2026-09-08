@@ -1,0 +1,737 @@
+{
+ "parent": "block/block",
+ "textures": {
+  "atlas": "block/park_flat_slab",
+  "particle": "block/park_flat_slab"
+ },
+ "elements": [
+  {
+   "name": "concrete_slab",
+   "from": [
+    0,
+    3,
+    0
+   ],
+   "to": [
+    16,
+    4,
+    16
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      7.5,
+      8,
+      15.5,
+      8.5
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      7.5,
+      8,
+      15.5,
+      8.5
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      7.5,
+      8,
+      15.5,
+      8.5
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      7.5,
+      8,
+      15.5,
+      8.5
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      0,
+      8,
+      8
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      8,
+      0,
+      16,
+      8
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "slab_base",
+   "from": [
+    0,
+    0,
+    0
+   ],
+   "to": [
+    16,
+    1,
+    16
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      7.5,
+      8,
+      15.5,
+      8.5
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      7.5,
+      8,
+      15.5,
+      8.5
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      7.5,
+      8,
+      15.5,
+      8.5
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      7.5,
+      8,
+      15.5,
+      8.5
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      8,
+      0,
+      16,
+      8
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      8,
+      0,
+      16,
+      8
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "slab_core",
+   "from": [
+    2,
+    1,
+    2
+   ],
+   "to": [
+    14,
+    3,
+    14
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      0.5,
+      8,
+      6.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      0.5,
+      8,
+      6.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      0.5,
+      8,
+      6.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      0.5,
+      8,
+      6.5,
+      9
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "corner_return",
+   "from": [
+    14,
+    1,
+    14
+   ],
+   "to": [
+    16,
+    3,
+    16
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "bevel_east",
+   "from": [
+    15,
+    2,
+    2
+   ],
+   "to": [
+    16,
+    3,
+    14
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      6,
+      14,
+      6.5,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      6,
+      14,
+      6.5,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      0,
+      14,
+      6,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      0,
+      14,
+      6,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      8,
+      0.5,
+      14
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      0,
+      8,
+      0.5,
+      14
+     ],
+     "texture": "#atlas"
+    }
+   },
+   "rotation": {
+    "origin": [
+     15,
+     3,
+     8
+    ],
+    "axis": "z",
+    "angle": -45
+   }
+  },
+  {
+   "name": "bevel_west",
+   "from": [
+    0,
+    2,
+    2
+   ],
+   "to": [
+    1,
+    3,
+    14
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      6,
+      14,
+      6.5,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      6,
+      14,
+      6.5,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      0,
+      14,
+      6,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      0,
+      14,
+      6,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      8,
+      0.5,
+      14
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      0,
+      8,
+      0.5,
+      14
+     ],
+     "texture": "#atlas"
+    }
+   },
+   "rotation": {
+    "origin": [
+     1,
+     3,
+     8
+    ],
+    "axis": "z",
+    "angle": 45
+   }
+  },
+  {
+   "name": "bevel_south",
+   "from": [
+    2,
+    2,
+    15
+   ],
+   "to": [
+    14,
+    3,
+    16
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      0,
+      14,
+      6,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      0,
+      14,
+      6,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      6,
+      14,
+      6.5,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      6,
+      14,
+      6.5,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      14,
+      6,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      0,
+      14,
+      6,
+      14.5
+     ],
+     "texture": "#atlas"
+    }
+   },
+   "rotation": {
+    "origin": [
+     8,
+     3,
+     15
+    ],
+    "axis": "x",
+    "angle": 45
+   }
+  },
+  {
+   "name": "bevel_north",
+   "from": [
+    2,
+    2,
+    0
+   ],
+   "to": [
+    14,
+    3,
+    1
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      0,
+      14,
+      6,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      0,
+      14,
+      6,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      6,
+      14,
+      6.5,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      6,
+      14,
+      6.5,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      14,
+      6,
+      14.5
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      0,
+      14,
+      6,
+      14.5
+     ],
+     "texture": "#atlas"
+    }
+   },
+   "rotation": {
+    "origin": [
+     8,
+     3,
+     1
+    ],
+    "axis": "x",
+    "angle": -45
+   }
+  },
+  {
+   "name": "corner_return_2",
+   "from": [
+    0,
+    1,
+    14
+   ],
+   "to": [
+    2,
+    3,
+    16
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "corner_return_2_2",
+   "from": [
+    14,
+    1,
+    0
+   ],
+   "to": [
+    16,
+    3,
+    2
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "corner_return_2_2_2",
+   "from": [
+    0,
+    1,
+    0
+   ],
+   "to": [
+    2,
+    3,
+    2
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      6.5,
+      8,
+      7.5,
+      9
+     ],
+     "texture": "#atlas"
+    }
+   }
+  }
+ ],
+ "groups": [
+  {
+   "name": "slab",
+   "origin": [
+    8,
+    0,
+    8
+   ],
+   "children": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ]
+  }
+ ]
+}

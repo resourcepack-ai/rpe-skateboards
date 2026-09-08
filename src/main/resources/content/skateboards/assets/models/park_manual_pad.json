@@ -1,0 +1,195 @@
+{
+ "parent": "block/block",
+ "textures": {
+  "atlas": "block/park_manual_pad",
+  "particle": "block/park_manual_pad"
+ },
+ "elements": [
+  {
+   "name": "solid_concrete_base",
+   "from": [
+    -16,
+    0,
+    0
+   ],
+   "to": [
+    32,
+    7,
+    16
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      0,
+      7.75,
+      12,
+      9.5
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      0,
+      7.75,
+      12,
+      9.5
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      12,
+      7.75,
+      16,
+      9.5
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      12,
+      7.75,
+      16,
+      9.5
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      0,
+      12,
+      4
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      0,
+      0,
+      12,
+      4
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "flat_concrete_top",
+   "from": [
+    -16,
+    7,
+    0
+   ],
+   "to": [
+    32,
+    8,
+    15
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      0,
+      9.5,
+      12,
+      9.75
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      12,
+      10,
+      15.75,
+      10.25
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      12,
+      10,
+      15.75,
+      10.25
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      4,
+      12,
+      7.75
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "front_steel_lip",
+   "from": [
+    -16,
+    7,
+    15
+   ],
+   "to": [
+    32,
+    8,
+    16
+   ],
+   "faces": {
+    "south": {
+     "uv": [
+      0,
+      9.75,
+      12,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      15.75,
+      10,
+      16,
+      10.25
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      15.75,
+      10,
+      16,
+      10.25
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      10,
+      12,
+      10.25
+     ],
+     "texture": "#atlas"
+    }
+   }
+  }
+ ],
+ "groups": [
+  {
+   "name": "manual_pad",
+   "origin": [
+    8,
+    0,
+    8
+   ],
+   "children": [
+    0,
+    1,
+    2
+   ]
+  }
+ ]
+}

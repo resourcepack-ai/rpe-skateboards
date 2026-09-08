@@ -1,0 +1,91 @@
+{
+ "parent": "block/block",
+ "textures": {
+  "atlas": "block/park_flat_slab_painted",
+  "particle": "block/park_flat_slab_painted"
+ },
+ "elements": [
+  {
+   "name": "concrete_slab",
+   "from": [
+    0,
+    0,
+    0
+   ],
+   "to": [
+    16,
+    4,
+    16
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      0,
+      8,
+      8,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      0,
+      8,
+      8,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      0,
+      8,
+      8,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      0,
+      8,
+      8,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      0,
+      8,
+      8
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      8,
+      0,
+      16,
+      8
+     ],
+     "texture": "#atlas"
+    }
+   }
+  }
+ ],
+ "groups": [
+  {
+   "name": "slab",
+   "origin": [
+    8,
+    0,
+    8
+   ],
+   "children": [
+    0
+   ]
+  }
+ ]
+}

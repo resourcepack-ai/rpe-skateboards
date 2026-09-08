@@ -1,0 +1,1223 @@
+{
+ "parent": "block/block",
+ "textures": {
+  "atlas": "block/park_quarter_pipe",
+  "particle": "block/park_quarter_pipe"
+ },
+ "elements": [
+  {
+   "name": "rear_deck_mass",
+   "from": [
+    -8,
+    0,
+    -16
+   ],
+   "to": [
+    24,
+    20,
+    -2
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      4.25,
+      3.125,
+      8.25,
+      5.625
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      4.25,
+      3.125,
+      8.25,
+      5.625
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      12,
+      3.125,
+      13.75,
+      5.625
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      12,
+      3.125,
+      13.75,
+      5.625
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      4.25,
+      5.875,
+      8.25,
+      7.625
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "upper_transition",
+   "from": [
+    -8,
+    5.5,
+    -8.5
+   ],
+   "to": [
+    24,
+    6.5,
+    16.5
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      0,
+      9.875,
+      4,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      0,
+      9.875,
+      4,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      0,
+      10,
+      3.125,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      0,
+      10,
+      3.125,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      0,
+      4,
+      3.125
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      4,
+      0,
+      8,
+      3.125
+     ],
+     "texture": "#atlas"
+    }
+   },
+   "rotation": {
+    "origin": [
+     8,
+     6.751,
+     16.404
+    ],
+    "axis": "x",
+    "angle": 45
+   }
+  },
+  {
+   "name": "lower_transition",
+   "from": [
+    -7.94,
+    0,
+    15
+   ],
+   "to": [
+    23.94,
+    1,
+    29
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      0,
+      9.875,
+      4,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      0,
+      9.875,
+      4,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      3.125,
+      10,
+      4.875,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      3.125,
+      10,
+      4.875,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      8.25,
+      5.875,
+      12.25,
+      7.625
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      4.25,
+      5.875,
+      8.25,
+      7.625
+     ],
+     "texture": "#atlas"
+    }
+   },
+   "rotation": {
+    "origin": [
+     8,
+     0.5,
+     29.486
+    ],
+    "axis": "x",
+    "angle": 22.5
+   }
+  },
+  {
+   "name": "rear_transition_foundation",
+   "from": [
+    -7,
+    0,
+    -2
+   ],
+   "to": [
+    23,
+    20,
+    1
+   ],
+   "faces": {
+    "south": {
+     "uv": [
+      8.25,
+      3.125,
+      12,
+      5.625
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      13.75,
+      3.125,
+      14.125,
+      5.625
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      13.75,
+      3.125,
+      14.125,
+      5.625
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      9.5,
+      9.375,
+      13.25,
+      9.75
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "high_transition_foundation",
+   "from": [
+    -7,
+    0,
+    1
+   ],
+   "to": [
+    23,
+    16,
+    5
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      0,
+      5.875,
+      3.75,
+      7.875
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      0,
+      5.875,
+      3.75,
+      7.875
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      3.75,
+      5.875,
+      4.25,
+      7.875
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      3.75,
+      5.875,
+      4.25,
+      7.875
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      9.375,
+      3.75,
+      9.875
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "middle_transition_foundation",
+   "from": [
+    -7,
+    0,
+    5
+   ],
+   "to": [
+    23,
+    12,
+    9
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      12.25,
+      5.875,
+      16,
+      7.375
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      12.25,
+      5.875,
+      16,
+      7.375
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      0,
+      7.875,
+      0.5,
+      9.375
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      0,
+      7.875,
+      0.5,
+      9.375
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      9.375,
+      3.75,
+      9.875
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "low_transition_foundation",
+   "from": [
+    -7,
+    0,
+    9
+   ],
+   "to": [
+    23,
+    8,
+    13
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      0.5,
+      7.875,
+      4.25,
+      8.875
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      0.5,
+      7.875,
+      4.25,
+      8.875
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      4.25,
+      7.875,
+      4.75,
+      8.875
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      4.25,
+      7.875,
+      4.75,
+      8.875
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      9.375,
+      3.75,
+      9.875
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "transition_knee_foundation",
+   "from": [
+    -7,
+    0,
+    13
+   ],
+   "to": [
+    23,
+    5,
+    17
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      4.75,
+      7.875,
+      8.5,
+      8.5
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      4.75,
+      7.875,
+      8.5,
+      8.5
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      8.5,
+      7.875,
+      9,
+      8.5
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      8.5,
+      7.875,
+      9,
+      8.5
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      9.375,
+      3.75,
+      9.875
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "lower_transition_foundation",
+   "from": [
+    -7,
+    0,
+    17
+   ],
+   "to": [
+    23,
+    3,
+    22
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      9.5,
+      9.375,
+      13.25,
+      9.75
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      9.5,
+      9.375,
+      13.25,
+      9.75
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      13.25,
+      9.375,
+      13.875,
+      9.75
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      13.25,
+      9.375,
+      13.875,
+      9.75
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      4.75,
+      7.875,
+      8.5,
+      8.5
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "toe_foundation",
+   "from": [
+    -7,
+    0,
+    22
+   ],
+   "to": [
+    23,
+    1,
+    26
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      12,
+      9.875,
+      15.75,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      12,
+      9.875,
+      15.75,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      6.375,
+      10,
+      6.875,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      6.375,
+      10,
+      6.875,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      9.375,
+      3.75,
+      9.875
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "right_concrete_cheek",
+   "from": [
+    24.06,
+    0,
+    -2
+   ],
+   "to": [
+    24.06,
+    22,
+    32
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      8,
+      0,
+      12.25,
+      2.75
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      0,
+      3.125,
+      4.25,
+      5.875
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "lip_coping",
+   "from": [
+    -8,
+    6.5,
+    -8.5
+   ],
+   "to": [
+    24,
+    7.5,
+    -7.5
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      4,
+      9.875,
+      8,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      4,
+      9.875,
+      8,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      7.25,
+      10,
+      7.375,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      7.25,
+      10,
+      7.375,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      4,
+      9.875,
+      8,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      4,
+      9.875,
+      8,
+      10
+     ],
+     "texture": "#atlas"
+    }
+   },
+   "rotation": {
+    "origin": [
+     8,
+     6.751,
+     16.404
+    ],
+    "axis": "x",
+    "angle": 45
+   }
+  },
+  {
+   "name": "right_concrete_cheek_copy",
+   "from": [
+    -8.06,
+    0,
+    -2
+   ],
+   "to": [
+    -8.06,
+    22,
+    32
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      8,
+      0,
+      12.25,
+      2.75
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      0,
+      3.125,
+      4.25,
+      5.875
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "deck_slab",
+   "from": [
+    -8,
+    20,
+    -16
+   ],
+   "to": [
+    24,
+    24,
+    -2
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      9,
+      7.875,
+      13,
+      8.375
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      9,
+      7.875,
+      13,
+      8.375
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      3.75,
+      9.375,
+      5.5,
+      9.875
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      3.75,
+      9.375,
+      5.5,
+      9.875
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      8.25,
+      5.875,
+      12.25,
+      7.625
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "deck_lip_bridge",
+   "from": [
+    -8,
+    24,
+    -2
+   ],
+   "to": [
+    24,
+    24,
+    -1
+   ],
+   "faces": {
+    "up": {
+     "uv": [
+      8,
+      9.875,
+      12,
+      10
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      8,
+      9.875,
+      12,
+      10
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "lower_side_seal",
+   "from": [
+    23.5,
+    0,
+    15
+   ],
+   "to": [
+    23.5,
+    1,
+    27
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      4.875,
+      10,
+      6.375,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      4.875,
+      10,
+      6.375,
+      10.125
+     ],
+     "texture": "#atlas"
+    }
+   },
+   "rotation": {
+    "origin": [
+     8,
+     1,
+     26.973
+    ],
+    "axis": "x",
+    "angle": 22.5
+   }
+  },
+  {
+   "name": "lower_side_seal_copy",
+   "from": [
+    -7.5,
+    0,
+    15
+   ],
+   "to": [
+    -7.5,
+    1,
+    27
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      4.875,
+      10,
+      6.375,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      4.875,
+      10,
+      6.375,
+      10.125
+     ],
+     "texture": "#atlas"
+    }
+   },
+   "rotation": {
+    "origin": [
+     8,
+     1,
+     26.973
+    ],
+    "axis": "x",
+    "angle": 22.5
+   }
+  },
+  {
+   "name": "ground_toe_transition",
+   "from": [
+    -8,
+    1,
+    29
+   ],
+   "to": [
+    24,
+    1,
+    32
+   ],
+   "faces": {
+    "up": {
+     "uv": [
+      5.5,
+      9.375,
+      9.5,
+      9.75
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      5.5,
+      9.375,
+      9.5,
+      9.75
+     ],
+     "texture": "#atlas"
+    }
+   },
+   "rotation": {
+    "origin": [
+     8,
+     0.5,
+     29.486
+    ],
+    "axis": "x",
+    "angle": 22.5
+   }
+  },
+  {
+   "name": "upper_side_seal",
+   "from": [
+    23.5,
+    4.5,
+    -8.5
+   ],
+   "to": [
+    23.5,
+    5.5,
+    16.5
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      0,
+      10,
+      3.125,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      0,
+      10,
+      3.125,
+      10.125
+     ],
+     "texture": "#atlas"
+    }
+   },
+   "rotation": {
+    "origin": [
+     8,
+     6.751,
+     16.404
+    ],
+    "axis": "x",
+    "angle": 45
+   }
+  },
+  {
+   "name": "toe_side_seal",
+   "from": [
+    23.56,
+    0,
+    26
+   ],
+   "to": [
+    23.56,
+    1,
+    29
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      6.875,
+      10,
+      7.25,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      6.875,
+      10,
+      7.25,
+      10.125
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "upper_side_seal_2",
+   "from": [
+    -7.5,
+    4.5,
+    -8.5
+   ],
+   "to": [
+    -7.5,
+    5.5,
+    16.5
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      0,
+      10,
+      3.125,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      0,
+      10,
+      3.125,
+      10.125
+     ],
+     "texture": "#atlas"
+    }
+   },
+   "rotation": {
+    "origin": [
+     -23,
+     6.751,
+     16.404
+    ],
+    "axis": "x",
+    "angle": 45
+   }
+  },
+  {
+   "name": "toe_side_seal_2",
+   "from": [
+    -7.44,
+    0,
+    26
+   ],
+   "to": [
+    -7.44,
+    1,
+    29
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      6.875,
+      10,
+      7.25,
+      10.125
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      6.875,
+      10,
+      7.25,
+      10.125
+     ],
+     "texture": "#atlas"
+    }
+   }
+  }
+ ],
+ "groups": [
+  {
+   "name": "quarter_pipe",
+   "origin": [
+    8,
+    0,
+    8
+   ],
+   "children": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11,
+    13,
+    14,
+    17,
+    18,
+    19,
+    20,
+    21
+   ]
+  },
+  {
+   "name": "right_side",
+   "origin": [
+    8,
+    0,
+    8
+   ],
+   "children": [
+    10
+   ]
+  },
+  {
+   "name": "left_side",
+   "origin": [
+    8,
+    0,
+    8
+   ],
+   "children": [
+    12
+   ]
+  },
+  {
+   "name": "right_lower_seal",
+   "origin": [
+    8,
+    0,
+    8
+   ],
+   "children": [
+    15
+   ]
+  },
+  {
+   "name": "left_lower_seal",
+   "origin": [
+    8,
+    0,
+    8
+   ],
+   "children": [
+    16
+   ]
+  }
+ ]
+}

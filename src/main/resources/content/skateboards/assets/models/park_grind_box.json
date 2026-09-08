@@ -1,0 +1,238 @@
+{
+ "parent": "block/block",
+ "textures": {
+  "atlas": "block/park_grind_box",
+  "particle": "block/park_grind_box"
+ },
+ "elements": [
+  {
+   "name": "solid_concrete_box",
+   "from": [
+    -8,
+    0,
+    0
+   ],
+   "to": [
+    24,
+    11,
+    16
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      8,
+      4,
+      16,
+      6.75
+     ],
+     "texture": "#atlas"
+    },
+    "south": {
+     "uv": [
+      8,
+      4,
+      16,
+      6.75
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      0,
+      7.5,
+      4,
+      10.25
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      0,
+      7.5,
+      4,
+      10.25
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      0,
+      8,
+      4
+     ],
+     "texture": "#atlas"
+    },
+    "down": {
+     "uv": [
+      8,
+      0,
+      16,
+      4
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "flat_grip_top",
+   "from": [
+    -8,
+    11,
+    1
+   ],
+   "to": [
+    24,
+    12,
+    15
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      12,
+      7.5,
+      15.5,
+      7.75
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      12,
+      7.5,
+      15.5,
+      7.75
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      0,
+      4,
+      8,
+      7.5
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "steel_long_edge",
+   "from": [
+    -8,
+    11,
+    0
+   ],
+   "to": [
+    24,
+    12,
+    1
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      4,
+      7.5,
+      12,
+      7.75
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      15.5,
+      7.5,
+      15.75,
+      7.75
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      15.5,
+      7.5,
+      15.75,
+      7.75
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      4,
+      7.5,
+      12,
+      7.75
+     ],
+     "texture": "#atlas"
+    }
+   }
+  },
+  {
+   "name": "steel_long_edge_2",
+   "from": [
+    -8,
+    11,
+    15
+   ],
+   "to": [
+    24,
+    12,
+    16
+   ],
+   "faces": {
+    "south": {
+     "uv": [
+      4,
+      7.5,
+      12,
+      7.75
+     ],
+     "texture": "#atlas"
+    },
+    "east": {
+     "uv": [
+      15.5,
+      7.5,
+      15.75,
+      7.75
+     ],
+     "texture": "#atlas"
+    },
+    "west": {
+     "uv": [
+      15.5,
+      7.5,
+      15.75,
+      7.75
+     ],
+     "texture": "#atlas"
+    },
+    "up": {
+     "uv": [
+      4,
+      7.5,
+      12,
+      7.75
+     ],
+     "texture": "#atlas"
+    }
+   }
+  }
+ ],
+ "groups": [
+  {
+   "name": "grind_box",
+   "origin": [
+    8,
+    0,
+    8
+   ],
+   "children": [
+    0,
+    1,
+    2,
+    3
+   ]
+  }
+ ]
+}
