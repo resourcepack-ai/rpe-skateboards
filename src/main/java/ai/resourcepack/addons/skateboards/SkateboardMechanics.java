@@ -61,8 +61,9 @@ import java.util.function.Supplier;
  *   vehicle does not (its coast floor is a car rolling to a halt). While
  *   nobody is pushing or braking, most of that drag is handed back.</li>
  *   <li><b>Wall riding.</b> Jump at a wall with speed, at a shallow enough
- *   angle, and the board holds itself against it - rolled over onto the wall,
- *   sinking gently, until the speed runs out. All of that is the engine's
+ *   angle, and the board holds itself against it - board and rider rolled
+ *   right over onto the wall, sinking gently, steering up and down it, until
+ *   the speed runs out or space kicks you off. All of that is the engine's
  *   ({@code wall-ride: true} on the vehicle); what is here is the rider's
  *   pose for it, and keeping the mid-air flick off while it lasts, because a
  *   board being spun is a board not being ridden.</li>

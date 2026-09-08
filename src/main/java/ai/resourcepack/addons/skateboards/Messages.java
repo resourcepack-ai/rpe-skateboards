@@ -30,7 +30,8 @@ final class Messages {
         DEFAULTS.put("players-only", "Only a player can hold a skateboard.");
         DEFAULTS.put("given", "Here's a board. Right-click the ground to set it down, W to push, "
                 + "S to push it backwards, hold sprint to tuck, hold shift to lie back, space to "
-                + "ollie, A/D in the air to spin it. Tap shift to step off. "
+                + "ollie, A/D in the air to spin it, and jump at a wall to ride it. "
+                + "Tap shift to step off. "
                 + "/skateboard stance right if you ride right foot forward.");
         DEFAULTS.put("no-item", "The engine has no skateboard item yet - has it finished loading? Try /rp reload.");
         DEFAULTS.put("placed", "Board's down. Right-click it to step on.");
