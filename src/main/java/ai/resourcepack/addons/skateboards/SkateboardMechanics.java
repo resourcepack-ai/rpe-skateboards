@@ -41,12 +41,18 @@ import java.util.function.Supplier;
  *   the nose, which is how a board is walked backwards. It only starts once
  *   the board has all but stopped, so holding S while rolling forward is
  *   still a brake, and it tops out low — nobody pushes fast backwards.</li>
- *   <li><b>The coffin.</b> Hold shift while rolling and the rider lies flat
+ *   <li><b>The coffin.</b> HOLD shift while rolling and the rider lies flat
  *   on their back along the board, feet first, hands folded on their chest.
- *   Shift is Minecraft's dismount, so this only works because the engine can
- *   be asked to keep a rider in their seat while the vehicle is moving
- *   ({@link Vehicle#holdOccupant}) - and because that hold lets go the moment
- *   the board stops, which is also how you get off.</li>
+ *   TAP shift and they step off, the way shift always did.
+ *
+ *   <p>Shift is Minecraft's dismount, which happens the instant the key goes
+ *   down - before anybody can know whether it is a tap or a hold. So the
+ *   engine is asked to refuse it ({@link Vehicle#holdOccupant}) and the
+ *   difference is settled here: the key is counted while it is down, and a
+ *   release inside {@link #SNEAK_TAP_TICKS} ejects the rider deliberately.
+ *   Holding past that is the coffin. The hold also lets go by itself once the
+ *   board stops, so shift on a stationary board is an ordinary dismount with
+ *   none of this in the way.</li>
  *   <li><b>Tucking.</b> Holding sprint crouches the rider and lifts the speed
  *   cap from cruising to the board's top, picking up speed slowly while held.
  *   "Bending down to go faster" is the mechanic the owner asked for by name,
@@ -152,6 +158,16 @@ final class SkateboardMechanics implements Listener {
      */
     static final double COFFIN_MIN_SPEED = 2.0;
 
+    /**
+     * Longest a press of shift can be and still mean "get off", ticks.
+     *
+     * <p>A quarter of a second. Long enough that a deliberate tap is never
+     * read as the start of a coffin, short enough that lying down does not
+     * feel delayed - and the coffin only begins after it, so the two can
+     * never both happen from one press.
+     */
+    static final int SNEAK_TAP_TICKS = 5;
+
     private final Plugin plugin;
     private final RPEnginePlugin engine;
     private final Map<UUID, Ride> rides = new HashMap<>();
@@ -189,6 +205,8 @@ final class SkateboardMechanics implements Listener {
         int pushEmoteLeft;
         boolean tucking;
         boolean coffin;
+        /** How long shift has been held this press, ticks; 0 when it is up. */
+        int sneakTicks;
         boolean wasAirborne;
         boolean flicked;
         boolean limited;
@@ -305,11 +323,22 @@ final class SkateboardMechanics implements Listener {
             ride.pushEmoteLeft--;
         }
 
-        // The coffin: shift held while rolling. It beats everything else on
-        // the ground - a rider lying on their back is not pushing, tucking or
-        // steering with their feet - and it lets the board roll on, because
-        // the whole point of it is that you are not doing anything.
-        ride.coffin = input.sneak() && speed > COFFIN_MIN_SPEED;
+        // Shift: a tap gets off, a hold lies down. The engine refused the
+        // dismount the key already caused (see the class note), so a tap has
+        // to be finished off here - which is also why the coffin cannot start
+        // until the press is too long to be a tap.
+        if (input.sneak()) {
+            ride.sneakTicks++;
+        } else {
+            if (ride.sneakTicks > 0 && ride.sneakTicks <= SNEAK_TAP_TICKS) {
+                ride.sneakTicks = 0;
+                ride.coffin = false;
+                board.eject(rider);
+                return;
+            }
+            ride.sneakTicks = 0;
+        }
+        ride.coffin = ride.sneakTicks > SNEAK_TAP_TICKS && speed > COFFIN_MIN_SPEED;
         if (ride.coffin) {
             ride.tucking = false;
             limit(board, ride, true);
@@ -367,6 +396,8 @@ final class SkateboardMechanics implements Listener {
         if (!ride.wasAirborne) {
             ride.flicked = false;
             ride.coffin = false;
+            // A press that spanned the take-off is not a tap on landing.
+            ride.sneakTicks = 0;
             // The airborne emote is the tuck-and-grab; a push or a tuck in
             // progress gives way to it.
             ride.pushEmoteLeft = 0;

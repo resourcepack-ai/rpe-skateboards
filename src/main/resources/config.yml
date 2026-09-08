@@ -9,7 +9,7 @@
 # file without a restart.
 
 # What every message is said behind. Set it to "" for none.
-prefix: "&bSkateboards &7"
+prefix: "&b[Skateboards] &7"
 
 # Land the board a long way round from the way it is travelling and the rider
 # comes off it, takes half a heart and gets told so. Straight is fine and so
@@ -22,7 +22,7 @@ bail: true
 
 messages:
   players-only: "Only a player can hold a skateboard."
-  given: "Here's a board. Right-click the ground to set it down, W to push, S to push it backwards, hold sprint to tuck, hold shift to lie back, space to ollie, A/D in the air to spin it. Stop before you step off. /skateboard stance right if you ride right foot forward."
+  given: "Here's a board. Right-click the ground to set it down, W to push, S to push it backwards, hold sprint to tuck, hold shift to lie back, space to ollie, A/D in the air to spin it. Tap shift to step off. /skateboard stance right if you ride right foot forward."
   no-item: "The engine has no skateboard item yet - has it finished loading? Try /rp reload."
   placed: "Board's down. Right-click it to step on."
   place-failed: "Couldn't set a board down there."

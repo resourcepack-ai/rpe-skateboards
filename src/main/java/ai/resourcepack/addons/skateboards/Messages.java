@@ -30,7 +30,7 @@ final class Messages {
         DEFAULTS.put("players-only", "Only a player can hold a skateboard.");
         DEFAULTS.put("given", "Here's a board. Right-click the ground to set it down, W to push, "
                 + "S to push it backwards, hold sprint to tuck, hold shift to lie back, space to "
-                + "ollie, A/D in the air to spin it. Stop before you step off. "
+                + "ollie, A/D in the air to spin it. Tap shift to step off. "
                 + "/skateboard stance right if you ride right foot forward.");
         DEFAULTS.put("no-item", "The engine has no skateboard item yet - has it finished loading? Try /rp reload.");
         DEFAULTS.put("placed", "Board's down. Right-click it to step on.");
@@ -51,7 +51,7 @@ final class Messages {
     }
 
     /** The prefix every message is sent behind. Empty is allowed, and means none. */
-    private static final String DEFAULT_PREFIX = "&bSkateboards &7";
+    private static final String DEFAULT_PREFIX = "&b[Skateboards] &7";
 
     private final String prefix;
     private final Map<String, String> messages = new LinkedHashMap<>();
