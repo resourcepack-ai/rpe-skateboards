@@ -17,6 +17,11 @@ skateboard:
   # against it until the speed runs out. The engine does the physics; the
   # plugin only dresses the rider for it (Vehicle.wallRiding).
   wall-ride: true
+  # No km/h above the hotbar. A car has a dashboard and a skateboard does not,
+  # and a number counting up in the corner of the screen turns a line you were
+  # riding into a stat you were watching. Nothing takes its place: the action
+  # bar is left alone for whatever else wants it.
+  speedometer: false
   # The wheel cycle is driven by how far the board has ROLLED rather than by
   # how long it has been playing: at the tucked top speed it runs at the rate
   # it was drawn at, at a crawl it crawls, and standing still it stops with
