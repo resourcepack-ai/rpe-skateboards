@@ -8,6 +8,17 @@ skateboard:
   # Almost no throttle of its own: W does not drive a skateboard, pushing
   # does, and the plugin does the pushing with Vehicle.nudge.
   acceleration: 0.6
+  # A board rolls. The engine's own floor is a car coasting to a halt in a few
+  # seconds, which is wrong for anything without an engine in it - this is what
+  # the plugin used to buy back by hand, twenty times a second.
+  coast: 0.15
+  # Land a long way round from the way you are going and you come off it.
+  # Straight is fine and so is straight backwards, which is a fakie.
+  bail:
+    from: 50
+    to: 130
+    min-speed: 3.0
+    damage: 1.0
   turn-speed: 160
   weight: 10
   scale: 0.5
@@ -17,11 +28,6 @@ skateboard:
   # against it until the speed runs out. The engine does the physics; the
   # plugin only dresses the rider for it (Vehicle.wallRiding).
   wall-ride: true
-  # No km/h above the hotbar. A car has a dashboard and a skateboard does not,
-  # and a number counting up in the corner of the screen turns a line you were
-  # riding into a stat you were watching. Nothing takes its place: the action
-  # bar is left alone for whatever else wants it.
-  speedometer: false
   # The wheel cycle is driven by how far the board has ROLLED rather than by
   # how long it has been playing: at the tucked top speed it runs at the rate
   # it was drawn at, at a crawl it crawls, and standing still it stops with

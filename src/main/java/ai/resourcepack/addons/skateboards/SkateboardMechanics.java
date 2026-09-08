@@ -4,6 +4,7 @@ import ai.resourcepack.engine.RPEnginePlugin;
 import ai.resourcepack.engine.api.Vehicle;
 import ai.resourcepack.engine.api.VehicleInput;
 import ai.resourcepack.engine.api.VehicleState;
+import ai.resourcepack.engine.api.event.VehicleBailEvent;
 import ai.resourcepack.engine.api.event.VehicleExitEvent;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -57,9 +58,6 @@ import java.util.function.Supplier;
  *   cap from cruising to the board's top, picking up speed slowly while held.
  *   "Bending down to go faster" is the mechanic the owner asked for by name,
  *   and it is the whole reason the sprint key reaches a plugin at all.</li>
- *   <li><b>Rolling.</b> A board coasts a long way, and the engine's road
- *   vehicle does not (its coast floor is a car rolling to a halt). While
- *   nobody is pushing or braking, most of that drag is handed back.</li>
  *   <li><b>Wall riding.</b> HOLD space against a wall and the board sticks to
  *   it - board and rider rolled right over onto it, sinking gently, steering
  *   up and down it, for as long as the key is held and there is wall to ride.
@@ -69,9 +67,10 @@ import java.util.function.Supplier;
  *   board being spun is a board not being ridden.</li>
  *   <li><b>Spinning.</b> A or D in the air flicks the board round under the
  *   rider — one flick per flight, carried by the engine's mid-air spin.</li>
- *   <li><b>Bailing.</b> Land with the board sideways to where it is going
- *   and the rider comes off. Straight is fine and so is backwards (a fakie);
- *   it is the 90 that puts you on the ground.</li>
+ *   <li><b>Bailing.</b> The vehicle's own {@code bail:}, which the engine
+ *   does. This plugin only decides whether it is allowed to happen (the
+ *   {@code bail} config key, through {@code VehicleBailEvent}) and what it
+ *   says about it.</li>
  * </ul>
  *
  * <p>Per-board state is kept here by chassis id and dropped when the rider
@@ -108,8 +107,6 @@ final class SkateboardMechanics implements Listener {
     static final double TUCK_GAIN = 0.05;
     /** Below this a tuck is just a crouch. */
     static final double TUCK_MIN_SPEED = 2.0;
-    /** Drag handed back per tick while rolling free — most of the engine's coast floor. */
-    static final double ROLL_ASSIST = 0.15;
     /** The flick, degrees per second added to the spin. */
     static final double SPIN = 320;
     /** A landing this far off the direction of travel, either way, is a bail. */
@@ -167,12 +164,12 @@ final class SkateboardMechanics implements Listener {
     static final double COFFIN_MIN_SPEED = 2.0;
 
     /**
-     * Longest a press of shift can be and still mean "get off", ticks.
+     * How long shift has to be held before it is a coffin rather than a way
+     * off the board, ticks.
      *
-     * <p>A quarter of a second. Long enough that a deliberate tap is never
-     * read as the start of a coffin, short enough that lying down does not
-     * feel delayed - and the coffin only begins after it, so the two can
-     * never both happen from one press.
+     * <p>The engine's own tap window, matched deliberately: it lets a press
+     * shorter than that through as a dismount, so a coffin starting any
+     * sooner would be a rider lying down on their way off.
      */
     static final int SNEAK_TAP_TICKS = 5;
 
@@ -279,13 +276,15 @@ final class SkateboardMechanics implements Listener {
         if (!ride.known) {
             ride.goofy = stance.isGoofy(rider);
             ride.known = true;
-            // Asked for ONCE, at the start of the ride, and not when the key
-            // is seen: the dismount happens on the tick shift goes down, and
-            // a hold applied after reading the key would be applied to
-            // somebody already standing in the road. The engine lets go by
-            // itself the moment the board stops, which is what makes "stop,
-            // then step off" the whole rule.
+            // Asked for ONCE, at the start of the ride: the dismount happens
+            // on the tick shift goes down, so a hold applied after reading the
+            // key would be applied to somebody already standing in the road.
+            // The engine tells a tap from a hold from here on - a tap still
+            // gets them off - and lets go by itself once the board stops.
             board.holdOccupant(rider, true);
+            // Which mirror of every state emote they wear. The seat's table
+            // cannot know a person's stance; this is how it is told.
+            board.dressVariant(rider, ride.goofy ? "goofy" : null);
         }
         VehicleInput input = board.input();
         double speed = board.groundSpeed();
@@ -344,19 +343,13 @@ final class SkateboardMechanics implements Listener {
             ride.pushEmoteLeft--;
         }
 
-        // Shift: a tap gets off, a hold lies down. The engine refused the
-        // dismount the key already caused (see the class note), so a tap has
-        // to be finished off here - which is also why the coffin cannot start
-        // until the press is too long to be a tap.
+        // Shift held is the coffin. A TAP of it is the engine's business -
+        // it holds the rider in the seat so the key can mean this, and lets a
+        // short press through as an ordinary dismount - so all that is left
+        // here is to wait out a press long enough not to be one.
         if (input.sneak()) {
             ride.sneakTicks++;
         } else {
-            if (ride.sneakTicks > 0 && ride.sneakTicks <= SNEAK_TAP_TICKS) {
-                ride.sneakTicks = 0;
-                ride.coffin = false;
-                board.eject(rider);
-                return;
-            }
             ride.sneakTicks = 0;
         }
         ride.coffin = ride.sneakTicks > SNEAK_TAP_TICKS && speed > COFFIN_MIN_SPEED;
@@ -364,7 +357,6 @@ final class SkateboardMechanics implements Listener {
             ride.tucking = false;
             limit(board, ride, true);
             wear(board, rider, ride, EMOTE_COFFIN);
-            board.nudge(ROLL_ASSIST);
             return;
         }
 
@@ -406,11 +398,6 @@ final class SkateboardMechanics implements Listener {
             return;
         }
 
-        // Rolling free: give back most of the engine's coast, so a board
-        // rolls like a board and not like a car with its engine off.
-        if (!input.forward() && !input.backward() && !input.jump() && speed > 0.5) {
-            board.nudge(ROLL_ASSIST);
-        }
     }
 
     private void inTheAir(Vehicle board, VehicleInput input, Ride ride) {
@@ -430,38 +417,60 @@ final class SkateboardMechanics implements Listener {
         }
     }
 
+    /**
+     * The trick chat, on landing: a fakie, or a clean one.
+     *
+     * <p>What made this a BAIL is the vehicle's own {@code bail:} and the
+     * engine's, which fires {@link VehicleBailEvent} first - see
+     * {@link #onBail}. All that is left here is the part nobody else could
+     * know: whether the rider had flicked the board round on the way, which
+     * is what makes a landing worth mentioning at all.
+     */
     private void landed(Vehicle board, Player rider, Ride ride, Location now) {
-        if (ride.last == null || ride.last.getWorld() != now.getWorld()) {
+        if (!ride.flicked || ride.last == null || ride.last.getWorld() != now.getWorld()
+                || !talking.getAsBoolean()) {
             return;
         }
         double dx = now.getX() - ride.last.getX();
         double dz = now.getZ() - ride.last.getZ();
-        double travelled = Math.hypot(dx, dz) * 20;
-        if (travelled < BAIL_MIN_SPEED) {
+        if (Math.hypot(dx, dz) * 20 < BAIL_MIN_SPEED) {
             return;
         }
         // Minecraft's yaw: 0 faces +z and increases clockwise, so the
         // direction of travel is atan2(-dx, dz).
         double travelYaw = Math.toDegrees(Math.atan2(-dx, dz));
         double off = Math.abs(wrap180(travelYaw - board.heading()));
-        if (off >= BAIL_FROM && off <= BAIL_TO) {
-            // Turned off in config.yml, a sideways landing simply carries on.
-            if (bailing.getAsBoolean()) {
-                bail(board, rider);
-            }
-        } else if (ride.flicked && talking.getAsBoolean()) {
-            rider.sendMessage(messages.get().get(off > BAIL_TO ? "fakie" : "landed"));
+        if (off < BAIL_FROM) {
+            rider.sendMessage(messages.get().get("landed"));
+        } else if (off > BAIL_TO) {
+            rider.sendMessage(messages.get().get("fakie"));
         }
     }
 
-    private void bail(Vehicle board, Player rider) {
-        board.eject(rider);
-        board.stop();
-        rider.damage(1.0);
-        if (talking.getAsBoolean()) {
-            rider.sendMessage(messages.get().get("bailed"));
+    /**
+     * Whether the board is allowed to throw its rider, and what it says when
+     * it does.
+     *
+     * <p>The vehicle asks for bailing in its own YAML, which is where a rule
+     * about a vehicle belongs - but a SERVER's answer to "may my players be
+     * thrown off" is a config key, and the pack file would be overwritten by
+     * the next version of this plugin anyway. So the engine offers the veto
+     * and this takes it.
+     */
+    @EventHandler
+    public void onBail(VehicleBailEvent event) {
+        if (!event.vehicle().id().equals(SkateboardsPlugin.BOARD)) {
+            return;
         }
-        rider.getWorld().playSound(rider.getLocation(), Sound.ENTITY_PLAYER_HURT, 0.6f, 1.0f);
+        if (!bailing.getAsBoolean()) {
+            event.setCancelled(true);
+            return;
+        }
+        if (talking.getAsBoolean()) {
+            event.getPlayer().sendMessage(messages.get().get("bailed"));
+        }
+        event.getPlayer().getWorld().playSound(
+                event.getPlayer().getLocation(), Sound.ENTITY_PLAYER_HURT, 0.6f, 1.0f);
     }
 
     /** Sets or clears the standing-up speed cap, only when it changes. */

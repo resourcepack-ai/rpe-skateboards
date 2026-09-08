@@ -1,6 +1,7 @@
 package ai.resourcepack.addons.skateboards;
 
 import ai.resourcepack.engine.RPEnginePlugin;
+import ai.resourcepack.engine.api.AddonContent;
 import ai.resourcepack.engine.api.ContentId;
 import ai.resourcepack.engine.api.Vehicle;
 import org.bukkit.Location;
@@ -12,7 +13,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -62,13 +62,11 @@ public final class SkateboardsPlugin extends JavaPlugin {
         }
         engine = (RPEnginePlugin) found;
 
-        Path into = engine.getDataFolder().toPath().resolve("content").resolve(NAMESPACE);
         boolean changed;
         try {
-            changed = ContentInstaller.install(getFile(), "content/" + NAMESPACE + "/", into,
-                    getDescription().getVersion(), getLogger());
+            changed = AddonContent.install(this, engine, NAMESPACE);
         } catch (Exception e) {
-            getLogger().severe("Could not install the skateboard content into " + into + ": " + e.getMessage());
+            getLogger().severe("Could not install the skateboard content: " + e.getMessage());
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
