@@ -2436,6 +2436,25 @@
    "name": "truck_kingpin_2"
   }
  ],
+ "display": {
+  "gui": {
+   "rotation": [
+    30,
+    -135,
+    0
+   ],
+   "translation": [
+    0.18,
+    -1.45,
+    0
+   ],
+   "scale": [
+    0.376,
+    0.376,
+    0.376
+   ]
+  }
+ },
  "groups": [
   {
    "name": "board",
