@@ -24,6 +24,8 @@ tasks.withType(JavaCompile).configureEach {
 repositories {
     mavenCentral()
     maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    // ai.resourcepack:common, our own shared plugin library.
+    maven { url = 'https://repo.resourcepack.ai' }
 }
 
 // The engine's jar, built beside this project. compileOnly, because the
@@ -40,6 +42,10 @@ def engineJar = System.getenv('ENGINE_JAR')
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.21.4-R0.1-SNAPSHOT'
     compileOnly engineJar
+
+    // The small library every ResourcePack AI plugin shades in (the update
+    // check, for one), relocated below so it never meets the engine's copy.
+    implementation 'ai.resourcepack:common:0.1.0'
 }
 
 tasks.register('checkEngineJar') {
@@ -63,6 +69,7 @@ processResources {
 shadowJar {
     archiveBaseName.set('RPE-skateboards')
     archiveClassifier.set('')
+    relocate 'ai.resourcepack.common', 'ai.resourcepack.addons.skateboards.libs.common'
 }
 
 // Only the shadow jar: the plain one is the same classes without the name

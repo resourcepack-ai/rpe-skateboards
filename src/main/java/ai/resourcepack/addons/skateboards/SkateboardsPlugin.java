@@ -52,6 +52,11 @@ public final class SkateboardsPlugin extends JavaPlugin {
     private Messages messages;
     private Skatepark park;
 
+    /** This plugin's SpigotMC resource id: the number in its page's URL. */
+    private static final int SPIGOT_RESOURCE = 139432;
+
+    private ai.resourcepack.common.update.UpdateCheck updates;
+
     @Override
     public void onEnable() {
         Plugin found = getServer().getPluginManager().getPlugin("RPEngine");
@@ -89,6 +94,29 @@ public final class SkateboardsPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(mechanics, this);
         getServer().getScheduler().runTaskTimer(this, mechanics::tick, 1L, 1L);
         getLogger().info("Skate or die. /skateboard for a board, /skatepark for something to ride.");
+
+        updates = ai.resourcepack.common.update.UpdateCheck.spigot(this, SPIGOT_RESOURCE)
+                .name("Skateboards")
+                .permission("skateboards.update")
+                .enabledWhen(() -> getConfig().getBoolean("update-check", true))
+                .player(this::tellUpdate)
+                .start();
+    }
+
+    /** The join nudge: the sentence, then the link as one clickable piece. */
+    private void tellUpdate(Player player, ai.resourcepack.common.update.UpdateCheck.Update update) {
+        net.md_5.bungee.api.chat.TextComponent line = new net.md_5.bungee.api.chat.TextComponent(
+                net.md_5.bungee.api.chat.TextComponent.fromLegacyText(messages.get("update",
+                        "latest", update.latest(), "running", update.running())));
+        net.md_5.bungee.api.chat.TextComponent link = new net.md_5.bungee.api.chat.TextComponent(
+                net.md_5.bungee.api.chat.TextComponent.fromLegacyText(messages.plain("update-link")));
+        link.setClickEvent(new net.md_5.bungee.api.chat.ClickEvent(
+                net.md_5.bungee.api.chat.ClickEvent.Action.OPEN_URL, update.url()));
+        link.setHoverEvent(new net.md_5.bungee.api.chat.HoverEvent(
+                net.md_5.bungee.api.chat.HoverEvent.Action.SHOW_TEXT,
+                new net.md_5.bungee.api.chat.hover.content.Text(update.url())));
+        line.addExtra(link);
+        player.spigot().sendMessage(line);
     }
 
     @Override

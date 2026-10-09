@@ -32,3 +32,6 @@ permissions:
   skateboards.reload:
     description: Reload the skateboard config.
     default: op
+  skateboards.update:
+    description: Be told on joining when a newer Skateboards is on SpigotMC.
+    default: op

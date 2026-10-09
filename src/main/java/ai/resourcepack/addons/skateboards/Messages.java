@@ -49,6 +49,8 @@ final class Messages {
         DEFAULTS.put("park-all", "There you go - all &f{count}&7 pieces. Build something.");
         DEFAULTS.put("park-unknown", "There's no park piece called &f{piece}&7. /skatepark to see them all.");
         DEFAULTS.put("park-none", "The engine has no park pieces yet - has it finished loading? Try /rp reload.");
+        DEFAULTS.put("update", "Skateboards &f{latest}&7 is out (you have {running}). ");
+        DEFAULTS.put("update-link", "&b&nGet it on SpigotMC");
     }
 
     /** The prefix every message is sent behind. Empty is allowed, and means none. */

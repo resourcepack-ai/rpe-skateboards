@@ -40,6 +40,12 @@ trick-messages: true
 give-on-join: false
 first-join-only: true
 
+# Say so when a newer Skateboards is out: once in the console, and to anybody
+# with skateboards.update (ops) as they join, with a link to its SpigotMC page.
+# It asks SpigotMC which version is current, a few seconds after start and
+# every six hours after, and sends nothing about this server in doing so.
+update-check: true
+
 messages:
   players-only: "Only a player can hold a skateboard."
   given: "Here's a board. Right-click the ground to set it down, W to push, S to push it backwards, hold sprint to tuck, hold shift to lie back, space to ollie, A/D in the air to spin it, and HOLD space against a wall to ride it. Tap shift to step off. /skateboard stance right if you ride right foot forward."
@@ -61,3 +67,6 @@ messages:
   park-all: "There you go - all &f{count}&7 pieces. Build something."
   park-unknown: "There's no park piece called &f{piece}&7. /skatepark to see them all."
   park-none: "The engine has no park pieces yet - has it finished loading? Try /rp reload."
+  # Told to ops as they join. {latest} is the new version, {running} this one's.
+  update: "Skateboards &f{latest}&7 is out (you have {running}). "
+  update-link: "&b&nGet it on SpigotMC"
