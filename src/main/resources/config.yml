@@ -40,8 +40,9 @@ trick-messages: true
 give-on-join: false
 first-join-only: true
 
-# Say so when a newer Skateboards is out: once in the console, and to anybody
-# with skateboards.update (ops) as they join, with a link to its SpigotMC page.
+# While a newer Skateboards is out, say so, with a link to its SpigotMC page: on
+# every check, in the console and to anybody online with skateboards.update (ops),
+# and to each of them every time they join.
 # It asks SpigotMC which version is current, a few seconds after start and
 # every six hours after, and sends nothing about this server in doing so.
 update-check: true
