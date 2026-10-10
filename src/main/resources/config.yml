@@ -43,12 +43,36 @@ first-join-only: true
 # Nudges you in the console on startup and in chat on join when an update is out.
 update-check: true
 
+# Putting one down without an item. /skateboard here makes a board out of nothing,
+# so it needs skateboards.here (ops only by default); the item is the way
+# everybody else parks one. Either way the same placement question is asked
+# first that the engine asks of the item (ModelPlaceEvent), so a WorldGuard
+# region, a lobby guard or anything else that keeps models out of a place
+# keeps these out too.
+#
+# On top of that, a command-made board has a cooldown and a cap per player.
+# The cap counts every board that player has standing in loaded chunks,
+# however they put it down; -1 for no cap. skateboards.here.unlimited skips both.
+#
+# Picking one up (sneak and right-click it) is only for the player who put it
+# down, or anyone with skateboards.pickup.others (ops by default). One parked
+# before owners were recorded is anybody's, as it always was.
+spawn-limits:
+  cooldown-seconds: 10
+  max-per-player: 2
+
 messages:
   players-only: "Only a player can hold a skateboard."
   given: "Here's a board. Right-click the ground to set it down, W to push, S to push it backwards, hold sprint to tuck, hold shift to lie back, space to ollie, A/D in the air to spin it, and HOLD space against a wall to ride it. Tap shift to step off. /skateboard stance right if you ride right foot forward."
   no-item: "The engine has no skateboard item yet - has it finished loading? Try /rp reload."
   placed: "Board's down. Right-click it to step on."
   place-failed: "Couldn't set a board down there."
+  here-denied: "Setting a board down with /skateboard here is for staff. Right-click the ground with the board instead."
+  spawn-cooldown: "Give it {seconds}s before putting another one down."
+  spawn-limit: "You already have &f{count}&7 boards out. Sneak and right-click one to pick it up first."
+  place-denied: "You can't put a board down here."
+  pickup-not-yours: "That isn't yours to pick up."
+  pickup-denied: "You can't pick that up here."
   # {stance} is "left" or "right" - which foot leads.
   stance-current: "You ride &f{stance} foot forward&7. /skateboard stance left|right to change."
   stance-set: "You ride &f{stance} foot forward&7 now."

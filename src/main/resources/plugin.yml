@@ -21,13 +21,22 @@ commands:
 
 permissions:
   skateboards.use:
-    description: Get a skateboard, and put one down.
+    description: Get a skateboard. Putting one down with the command is skateboards.here.
     default: true
   skateboards.ride:
     description: Get on a skateboard that is already down.
     default: true
   skateboards.park:
     description: Get skatepark pieces to place.
+    default: op
+  skateboards.here:
+    description: Put a board down in front of you with /skateboard here, without an item.
+    default: op
+  skateboards.here.unlimited:
+    description: Skip the cooldown and the per-player cap on boards made by command.
+    default: op
+  skateboards.pickup.others:
+    description: Pick up a board somebody else put down.
     default: op
   skateboards.reload:
     description: Reload the skateboard config.

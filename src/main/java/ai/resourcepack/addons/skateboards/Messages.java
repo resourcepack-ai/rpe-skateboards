@@ -36,6 +36,12 @@ final class Messages {
         DEFAULTS.put("no-item", "The engine has no skateboard item yet - has it finished loading? Try /rp reload.");
         DEFAULTS.put("placed", "Board's down. Right-click it to step on.");
         DEFAULTS.put("place-failed", "Couldn't set a board down there.");
+        DEFAULTS.put("here-denied", "Setting a board down with /skateboard here is for staff. Right-click the ground with the board instead.");
+        DEFAULTS.put("spawn-cooldown", "Give it {seconds}s before putting another one down.");
+        DEFAULTS.put("spawn-limit", "You already have &f{count}&7 boards out. Sneak and right-click one to pick it up first.");
+        DEFAULTS.put("place-denied", "You can't put a board down here.");
+        DEFAULTS.put("pickup-not-yours", "That isn't yours to pick up.");
+        DEFAULTS.put("pickup-denied", "You can't pick that up here.");
         DEFAULTS.put("stance-current", "You ride &f{stance} foot forward&7. /skateboard stance left|right to change.");
         DEFAULTS.put("stance-set", "You ride &f{stance} foot forward&7 now.");
         DEFAULTS.put("stance-set-riding", "You ride &f{stance} foot forward&7 now - turning you round.");

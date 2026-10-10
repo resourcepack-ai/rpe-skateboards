@@ -184,16 +184,19 @@ final class SkateboardMechanics implements Listener {
     private final BooleanSupplier bailing;
     /** Whether the board says anything about what was just ridden. {@code trick-messages}. */
     private final BooleanSupplier talking;
+    /** Whose a board is and whether the protection plugins let it be taken. */
+    private final VehicleGuard guard;
 
     SkateboardMechanics(Plugin plugin, RPEnginePlugin engine, Stance stance,
                         Supplier<Messages> messages, BooleanSupplier bailing,
-                        BooleanSupplier talking) {
+                        BooleanSupplier talking, VehicleGuard guard) {
         this.plugin = plugin;
         this.engine = engine;
         this.stance = stance;
         this.messages = messages;
         this.bailing = bailing;
         this.talking = talking;
+        this.guard = guard;
     }
 
     /** A rider changed stance mid-ride: turn them and re-dress them now. */
@@ -486,8 +489,13 @@ final class SkateboardMechanics implements Listener {
      * Sneak and right-click an empty board to pick it up. Ahead of the
      * engine's own click handler, which would otherwise seat you; the engine
      * listens with {@code ignoreCancelled}, so cancelling here is enough.
+     *
+     * <p>Being first means the protection plugins have not judged the click
+     * yet, so {@link VehicleGuard#refusePickUp} asks them, and only the
+     * board's owner (or staff) may take it. A click something earlier already
+     * cancelled is left alone.
      */
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onPickUp(PlayerInteractAtEntityEvent event) {
         if (event.getHand() != EquipmentSlot.HAND || !event.getPlayer().isSneaking()) {
             return;
@@ -497,6 +505,11 @@ final class SkateboardMechanics implements Listener {
             return;
         }
         event.setCancelled(true);
+        String refused = guard.refusePickUp(event.getPlayer(), found.get(), event.getRightClicked());
+        if (refused != null) {
+            event.getPlayer().sendMessage(refused);
+            return;
+        }
         Optional<ItemStack> item = engine.items().create(SkateboardsPlugin.DECK);
         if (item.isEmpty()) {
             return;

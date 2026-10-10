@@ -57,6 +57,8 @@ public final class SkateboardsPlugin extends JavaPlugin {
 
     private ai.resourcepack.common.update.UpdateCheck updates;
 
+    private VehicleGuard guard;
+
     @Override
     public void onEnable() {
         Plugin found = getServer().getPluginManager().getPlugin("RPEngine");
@@ -88,9 +90,11 @@ public final class SkateboardsPlugin extends JavaPlugin {
         stance = new Stance(this);
         getServer().getPluginManager().registerEvents(new JoinGift(this, engine), this);
         park = new Skatepark(engine, this::messages);
+        guard = new VehicleGuard(this, engine, BOARD, "skateboards", this::messages);
+        getServer().getPluginManager().registerEvents(guard, this);
         mechanics = new SkateboardMechanics(this, engine, stance, this::messages,
                 () -> getConfig().getBoolean("bail", true),
-                () -> getConfig().getBoolean("trick-messages", true));
+                () -> getConfig().getBoolean("trick-messages", true), guard);
         getServer().getPluginManager().registerEvents(mechanics, this);
         getServer().getScheduler().runTaskTimer(this, mechanics::tick, 1L, 1L);
         getLogger().info("Skate or die. /skateboard for a board, /skatepark for something to ride.");
@@ -161,6 +165,12 @@ public final class SkateboardsPlugin extends JavaPlugin {
             return true;
         }
         if (args.length > 0 && args[0].equalsIgnoreCase("here")) {
+            // A board out of nothing, so staff only, and still asked of the
+            // same protection the item is - see VehicleGuard.
+            if (!player.hasPermission("skateboards.here")) {
+                player.sendMessage(messages.get("here-denied"));
+                return true;
+            }
             Location ahead = player.getLocation().clone();
             Vector forward = ahead.getDirection().setY(0);
             if (forward.lengthSquared() > 1e-6) {
@@ -169,7 +179,13 @@ public final class SkateboardsPlugin extends JavaPlugin {
             ahead.setX(Math.floor(ahead.getX()) + 0.5);
             ahead.setZ(Math.floor(ahead.getZ()) + 0.5);
             ahead.setY(Math.floor(ahead.getY()));
+            String refused = guard.refuseSpawn(player, ahead);
+            if (refused != null) {
+                player.sendMessage(refused);
+                return true;
+            }
             Optional<Vehicle> board = engine.vehicles().spawn(ahead, BOARD);
+            board.ifPresent(placed -> guard.spawned(player, placed));
             player.sendMessage(messages.get(board.isPresent() ? "placed" : "place-failed"));
             return true;
         }
