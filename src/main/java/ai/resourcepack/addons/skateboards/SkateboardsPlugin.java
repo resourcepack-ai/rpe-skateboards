@@ -60,7 +60,25 @@ public final class SkateboardsPlugin extends JavaPlugin {
     private VehicleGuard guard;
 
     @Override
+    public void onLoad() {
+        // Asked before the worlds load, so the answer is back for the startup banner.
+        ai.resourcepack.common.update.UpdateCheck.early(this, SPIGOT_RESOURCE);
+    }
+
+    @Override
     public void onEnable() {
+        if (updates != null) updates.stop();
+        updates = ai.resourcepack.common.update.UpdateCheck.spigot(this, SPIGOT_RESOURCE)
+                .name("Skateboards")
+                .permission("skateboards.update")
+                .enabledWhen(() -> getConfig().getBoolean("update-check", true))
+                .player(this::tellUpdate);
+        ai.resourcepack.common.banner.StartupBanner banner = ai.resourcepack.common.banner.StartupBanner.begin(this)
+                .name("Skateboards")
+                .addonOf("RP Engine")
+                .tagline("Skateboards with real tricks.")
+                .docs("https://resourcepack.ai/docs/rp-engine/skateboards")
+                .updates(updates);
         Plugin found = getServer().getPluginManager().getPlugin("RPEngine");
         if (!(found instanceof RPEnginePlugin)) {
             getLogger().severe("RP Engine is not here, and a skateboard is nothing without it. Disabling.");
@@ -81,7 +99,7 @@ public final class SkateboardsPlugin extends JavaPlugin {
             // The engine built its packs before we enabled. One reload folds
             // ours in; on every later start the files are already there and
             // the engine read them itself.
-            getLogger().info("Installed the skateboard content into the engine; reloading it once.");
+            banner.ok("Content", "Installed into RP Engine, which reloaded once");
             engine.reload();
         }
 
@@ -97,14 +115,9 @@ public final class SkateboardsPlugin extends JavaPlugin {
                 () -> getConfig().getBoolean("trick-messages", true), guard);
         getServer().getPluginManager().registerEvents(mechanics, this);
         getServer().getScheduler().runTaskTimer(this, mechanics::tick, 1L, 1L);
-        getLogger().info("Skate or die. /skateboard for a board, /skatepark for something to ride.");
-
-        updates = ai.resourcepack.common.update.UpdateCheck.spigot(this, SPIGOT_RESOURCE)
-                .name("Skateboards")
-                .permission("skateboards.update")
-                .enabledWhen(() -> getConfig().getBoolean("update-check", true))
-                .player(this::tellUpdate)
-                .start();
+        banner.ok("Commands", "/skateboard for a board, /skatepark for somewhere to ride");
+        updates.start();
+        banner.print();
     }
 
     /** The join nudge: the sentence, then the link as one clickable piece. */
