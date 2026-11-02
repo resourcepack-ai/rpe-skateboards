@@ -63,8 +63,10 @@ spawn-limits:
 
 messages:
   players-only: "Only a player can hold a skateboard."
-  given: "Here's a board. Right-click the ground to set it down, W to push, S to push it backwards, hold sprint to tuck, hold shift to lie back, space to ollie, A/D in the air to spin it, and HOLD space against a wall to ride it. Tap shift to step off. /skateboard stance right if you ride right foot forward."
-  no-item: "The engine has no skateboard item yet - has it finished loading? Try /rp reload."
+  given: "Here's a board. Right-click the ground to set it down, then right-click it to hop on. /skateboard controls for the keys."
+  controls: "W to push, S to push it backwards, hold sprint to tuck, hold shift to lie back, space to ollie, A/D in the air to spin it, and HOLD space against a wall to ride it. Tap shift to step off. /skateboard stance right if you ride right foot forward."
+  no-item: "Boards aren't loaded yet - try again in a moment."
+  usage: "/skateboard for a board, /skateboard controls for the keys, /skateboard stance left|right to change feet."
   placed: "Board's down. Right-click it to step on."
   place-failed: "Couldn't set a board down there."
   here-denied: "Setting a board down with /skateboard here is for staff. Right-click the ground with the board instead."

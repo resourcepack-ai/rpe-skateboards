@@ -11,8 +11,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.StringUtil;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -138,7 +140,29 @@ public final class SkateboardsPlugin extends JavaPlugin {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return command.getName().equalsIgnoreCase("skatepark") ? park.complete(args) : null;
+        return command.getName().equalsIgnoreCase("skatepark") ? park.complete(args) : completeBoard(sender, args);
+    }
+
+    /**
+     * The command's own words, and only the ones this sender may use. Null
+     * would have Bukkit offer the names of online players, none of which
+     * mean anything here.
+     */
+    private List<String> completeBoard(CommandSender sender, String[] args) {
+        if (args.length == 2 && args[0].equalsIgnoreCase("stance")) {
+            return StringUtil.copyPartialMatches(args[1], List.of("left", "right"), new ArrayList<>());
+        }
+        if (args.length != 1) {
+            return List.of();
+        }
+        List<String> words = new ArrayList<>(List.of("controls", "stance"));
+        if (sender.hasPermission("skateboards.here")) {
+            words.add("here");
+        }
+        if (sender.hasPermission("skateboards.reload")) {
+            words.add("reload");
+        }
+        return StringUtil.copyPartialMatches(args[0], words, new ArrayList<>());
     }
 
     @Override
@@ -151,6 +175,10 @@ public final class SkateboardsPlugin extends JavaPlugin {
             reloadConfig();
             messages = new Messages(getConfig());
             sender.sendMessage(messages.get("reloaded"));
+            return true;
+        }
+        if (args.length > 0 && args[0].equalsIgnoreCase("controls")) {
+            sender.sendMessage(messages.get("controls"));
             return true;
         }
         if (!(sender instanceof Player)) {
@@ -200,6 +228,12 @@ public final class SkateboardsPlugin extends JavaPlugin {
             Optional<Vehicle> board = engine.vehicles().spawn(ahead, BOARD);
             board.ifPresent(placed -> guard.spawned(player, placed));
             player.sendMessage(messages.get(board.isPresent() ? "placed" : "place-failed"));
+            return true;
+        }
+        if (args.length > 0) {
+            // Anything else - a typo, or reload without the permission - is
+            // not a request for another one, so it gets the usage instead.
+            player.sendMessage(messages.get("usage"));
             return true;
         }
         Optional<ItemStack> item = engine.items().create(DECK);
