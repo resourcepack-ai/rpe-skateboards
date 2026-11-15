@@ -27,8 +27,7 @@ repositories {
     // ai.resourcepack:common, our own shared plugin library. Exclusive: the
     // ai.resourcepack group is looked for here and nowhere else, so a
     // look-alike published to Central or any repository above cannot stand in
-    // for it. (A checkout with ../plugin-common builds it from source instead;
-    // see settings.gradle.)
+    // for it.
     exclusiveContent {
         forRepository {
             maven { url = 'https://repo.resourcepack.ai' }
@@ -39,16 +38,69 @@ repositories {
     }
 }
 
-// The engine's jar, built beside this project. compileOnly, because the
-// engine is a plugin the server already has: shading it in would be a second
-// copy of every class, and Bukkit would load whichever it saw first.
-//
-// A file dependency rather than a Maven coordinate because the engine is not
-// published to a repository - it is sold as a jar. Somebody building this
-// addon against a release they downloaded points ENGINE_JAR at it.
-def engineJar = System.getenv('ENGINE_JAR')
-        ? files(System.getenv('ENGINE_JAR'))
-        : fileTree(dir: '../../rp-engine/build/libs', include: 'rp-engine-*.jar', exclude: '*-sources.jar')
+// RP Engine, compileOnly, because the engine is a plugin the server already
+// has: shading it in would be a second copy of every class, and Bukkit would
+// load whichever it saw first. The jar to compile against is the first of:
+//   1. ENGINE_JAR, the path to any RP Engine jar;
+//   2. an engine built beside this project, in ../../rp-engine/build/libs
+//      (-PengineDir=<dir> looks somewhere else): the newest version there, as
+//      every build leaves its jar behind and two engines on one classpath
+//      would be whichever the file system listed first;
+//   3. the released RP Engine this addon needs, downloaded once from
+//      cdn.resourcepack.ai into .gradle/rp-engine/ and checked against its SHA-256.
+// The released one is ENGINE_VERSION, the oldest engine the plugin runs on:
+// compiling against it keeps a newer call out.
+def ENGINE_VERSION = '0.2.32'
+def ENGINE_SHA256 = '8d0eb557fffeda6fa093ee17282450d1add0a4f2227db3f9b5e9d8adbb6608d0'
+def ENGINE_URL = "https://cdn.resourcepack.ai/RPEngine-${ENGINE_VERSION}.jar"
+
+def engineEnv = System.getenv('ENGINE_JAR')
+def engineDir = file(findProperty('engineDir') ?: '../../rp-engine/build/libs')
+// rp-engine-<version>.jar -> [major, minor, patch...]; null for anything else (-sources and the like).
+def engineVersion = { File f ->
+    def m = f.name =~ /^rp-engine-(\d+(?:\.\d+)*)\.jar$/
+    m.matches() ? m.group(1).tokenize('.').collect { it as int } : null
+}
+def newerFirst = { File a, File b ->
+    def x = engineVersion(a)
+    def y = engineVersion(b)
+    for (int i = 0; i < Math.max(x.size(), y.size()); i++) {
+        int c = (i < x.size() ? x[i] : 0) <=> (i < y.size() ? y[i] : 0)
+        if (c != 0) return -c
+    }
+    return 0
+}
+def engineBuilt = ((engineDir.listFiles() ?: []) as List<File>).findAll { engineVersion(it) != null }.sort(newerFirst).take(1)
+def engineDownloaded = file(".gradle/rp-engine/RPEngine-${ENGINE_VERSION}.jar")
+
+def downloadEngine = tasks.register('downloadEngine') {
+    description = "Downloads RP Engine ${ENGINE_VERSION} to compile against."
+    outputs.file(engineDownloaded)
+    onlyIf { !engineDownloaded.isFile() }
+    doLast {
+        if (gradle.startParameter.offline) {
+            throw new GradleException("RP Engine ${ENGINE_VERSION} is not downloaded yet and Gradle is offline. " +
+                    "Run once online, or set ENGINE_JAR to an RP Engine jar.")
+        }
+        def part = file("${engineDownloaded}.part")
+        part.parentFile.mkdirs()
+        logger.lifecycle("Downloading ${ENGINE_URL}")
+        URI.create(ENGINE_URL).toURL().withInputStream { input -> part.withOutputStream { it << input } }
+        def sha = java.security.MessageDigest.getInstance('SHA-256').digest(part.bytes).encodeHex().toString()
+        if (sha != ENGINE_SHA256) {
+            part.delete()
+            throw new GradleException("${ENGINE_URL} has SHA-256 ${sha}, expected ${ENGINE_SHA256}. Not using it.")
+        }
+        java.nio.file.Files.move(part.toPath(), engineDownloaded.toPath(),
+                java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+    }
+}
+
+def engineJar = engineEnv
+        ? files(engineEnv)
+        : !engineBuilt.isEmpty()
+            ? files(engineBuilt)
+            : files(engineDownloaded).builtBy(downloadEngine)
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.21.4-R0.1-SNAPSHOT'
@@ -58,17 +110,6 @@ dependencies {
     // check, for one), relocated below so it never meets the engine's copy.
     implementation 'ai.resourcepack:common:0.8.1'
 }
-
-tasks.register('checkEngineJar') {
-    doFirst {
-        if (engineJar.files.isEmpty()) {
-            throw new GradleException(
-                    "No RP Engine jar to compile against. Build the engine first (cd ../../rp-engine && ./gradlew build) " +
-                    "or set ENGINE_JAR to a downloaded RPEngine jar.")
-        }
-    }
-}
-compileJava.dependsOn checkEngineJar
 
 processResources {
     inputs.property('version', project.version)

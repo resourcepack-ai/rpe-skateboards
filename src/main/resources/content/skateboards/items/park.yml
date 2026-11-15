@@ -1,5 +1,6 @@
 # The skatepark. Every piece is placeable and every piece holds a
 # vehicle up on its own cubes, which is what lets a board roll up a
+# ramp and grind along a box.
 
 park_flat_slab:
   material: PAPER
